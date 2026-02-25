@@ -51,8 +51,50 @@
     .video-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.60); /* adjust 0.60 → 0.70 if text needs more contrast */
+      background: rgba(0, 0, 0, 0.60);
       z-index: -1;
+    }
+
+    /* Optimized "Get your free consultation" button – matches "Start Your Project" style + mobile-friendly */
+    .btn-consult {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;                    /* base = same as Start button */
+      font-size: 1.125rem;                   /* text-lg */
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(to right, #ff4500, #ff8c00);
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(255, 69, 0, 0.3);
+      transition: all 0.3s ease;
+      min-width: 240px;
+      text-align: center;
+    }
+
+    .btn-consult:hover {
+      background: linear-gradient(to right, #ff6347, #ffb347);
+      box-shadow: 0 15px 40px rgba(255, 99, 71, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile optimization */
+    @media (max-width: 640px) {
+      .btn-consult {
+        width: 100%;
+        max-width: 360px;
+        padding: 1.125rem 1.5rem;           /* slightly taller for easy tap */
+        font-size: 1.125rem;                /* keep readable */
+        margin: 0 auto;
+        display: block;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 1023px) {
+      .btn-consult {
+        padding: 1.125rem 2.5rem;
+        font-size: 1.25rem;
+      }
     }
   </style>
 </head>
@@ -75,125 +117,91 @@
   <div class="video-overlay"></div>
 
   <!-- Header / Navigation Bar -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 sm:h-20">
-      <!-- Logo & Brand -->
-      <a href="index.html" class="flex items-center gap-3 group">
-        <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
-        <div class="flex flex-col">
-          <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
-          <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
-        <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
-        <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
-        <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
-        <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
-        <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
-        <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
-
-        <!-- More Dropdown – click to toggle -->
-        <div class="relative">
-          <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
-            More
-            <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
-            <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
-            <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
-            <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Logo & Brand -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+            <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
           </div>
-        </div>
-
-        <!-- CTA Button -->
-        <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
-          Contact Us
         </a>
-      </nav>
 
-      <!-- Mobile Hamburger Button -->
-      <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+          <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+          <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+          <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+          <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+          <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+          <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+          <!-- More Dropdown -->
+          <div class="relative">
+            <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+              More
+              <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+              <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+              <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+              <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Slide-in Menu -->
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 bg-black/95 backdrop-blur-xl border-l border-orange-900/40 transform translate-x-full transition-transform duration-400 lg:hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-between p-6 border-b border-orange-900/40">
+      <div class="flex items-center gap-3">
+        <img src="Ruach favicon.png" alt="Ruacheon" class="h-12" />
+        <span class="text-xl font-bold text-white">RUACHEON</span>
+      </div>
+      <button id="mobile-close" class="text-white focus:outline-none">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
     </div>
+    <nav class="flex flex-col p-6 space-y-4 text-lg font-medium text-white">
+      <a href="index.html" class="hover:text-orange-400 transition py-1">Home</a>
+      <a href="services.html" class="hover:text-orange-400 transition py-1">Services</a>
+      <a href="portfolio.html" class="hover:text-orange-400 transition py-1">Portfolio</a>
+      <a href="pricing.html" class="hover:text-orange-400 transition py-1">Pricing</a>
+      <a href="about.html" class="hover:text-orange-400 transition py-1">About</a>
+      <a href="blog.html" class="hover:text-orange-400 transition py-1">Blog</a>
+      <div class="pt-6 border-t border-orange-900/40 mt-2">
+        <a href="team.html" class="block hover:text-orange-400 transition py-2">Team</a>
+        <a href="hire us.html" class="block hover:text-orange-400 transition py-2">Hire Us</a>
+        <a href="testimonial.html" class="block hover:text-orange-400 transition py-2">Testimonial</a>
+      </div>
+      <a href="contact.html" class="mt-10 block py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold shadow-lg hover:shadow-xl transition">
+        Contact Us
+      </a>
+    </nav>
   </div>
-</header>
 
-<!-- Mobile Slide-in Menu -->
-<div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 bg-black/95 backdrop-blur-xl border-l border-orange-900/40 transform translate-x-full transition-transform duration-400 lg:hidden z-50 overflow-y-auto">
-  <div class="flex items-center justify-between p-6 border-b border-orange-900/40">
-    <div class="flex items-center gap-3">
-      <img src="Ruach favicon.png" alt="Ruacheon" class="h-12" />
-      <span class="text-xl font-bold text-white">RUACHEON</span>
-    </div>
-    <button id="mobile-close" class="text-white focus:outline-none">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-  </div>
-  <nav class="flex flex-col p-6 space-y-4 text-lg font-medium text-white">
-    <a href="index.html" class="hover:text-orange-400 transition py-1">Home</a>
-    <a href="services.html" class="hover:text-orange-400 transition py-1">Services</a>
-    <a href="portfolio.html" class="hover:text-orange-400 transition py-1">Portfolio</a>
-    <a href="pricing.html" class="hover:text-orange-400 transition py-1">Pricing</a>
-    <a href="about.html" class="hover:text-orange-400 transition py-1">About</a>
-    <a href="blog.html" class="hover:text-orange-400 transition py-1">Blog</a>
-    <div class="pt-6 border-t border-orange-900/40 mt-2">
-      <a href="team.html" class="block hover:text-orange-400 transition py-2">Team</a>
-      <a href="hire us.html" class="block hover:text-orange-400 transition py-2">Hire Us</a>
-      <a href="testimonial.html" class="block hover:text-orange-400 transition py-2">Testimonial</a>
-    </div>
-    <a href="contact.html" class="mt-10 block py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold shadow-lg hover:shadow-xl transition">
-      Contact Us
-    </a>
-  </nav>
-</div>
-
-<!-- Overlay (click to close mobile menu) -->
-<div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden lg:hidden z-40 transition-opacity duration-400"></div>
-
-<!-- Mobile Menu (off-canvas, scrollable) -->
-<div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 bg-black/95 backdrop-blur-xl border-l border-orange-900/40 transform translate-x-full transition-transform duration-400 lg:hidden z-50 overflow-y-auto">
-  <div class="flex items-center justify-between p-6 border-b border-orange-900/40">
-    <div class="flex items-center gap-3">
-      <img src="Ruach favicon.png" alt="Ruacheon" class="h-12" />
-      <span class="text-xl font-bold text-white">RUACHEON</span>
-    </div>
-    <button id="mobile-close" class="text-white focus:outline-none">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-  </div>
-  <nav class="flex flex-col p-6 space-y-4 text-lg font-medium text-white">
-    <a href="index.html" class="hover:text-orange-400 transition py-1">Home</a>
-    <a href="services.html" class="hover:text-orange-400 transition py-1">Services</a>
-    <a href="portfolio.html" class="hover:text-orange-400 transition py-1">Portfolio</a>
-    <a href="pricing.html" class="hover:text-orange-400 transition py-1">Pricing</a>
-    <a href="about.html" class="hover:text-orange-400 transition py-1">About</a>
-    <a href="blog.html" class="hover:text-orange-400 transition py-1">Blog</a>
-    <div class="pt-6 border-t border-orange-900/40 mt-2">
-      <a href="team.html" class="block hover:text-orange-400 transition py-2">Team</a>
-      <a href="hire us.html" class="block hover:text-orange-400 transition py-2">Hire Us</a>
-      <a href="testimonial.html" class="block hover:text-orange-400 transition py-2">Testimonial</a>
-    </div>
-    <a href="contact.html" class="mt-10 block py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold shadow-lg hover:shadow-xl transition">
-      Contact Us
-    </a>
-  </nav>
-</div>
-
-<!-- Overlay (click outside to close mobile menu) -->
-<div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden lg:hidden z-40 transition-opacity duration-400"></div>
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden lg:hidden z-40 transition-opacity duration-400"></div>
 
   <section class="py-28 md:py-40 text-center bg-gradient-to-b from-black via-gray-950 to-black">
     <div class="container mx-auto px-6">
@@ -240,26 +248,24 @@
   <section class="py-20 bg-black/40">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-4xl font-bold mb-12 flame-gradient">Ready to Ignite Your Growth?</h2>
-      <a href="contact.html" class="btn-flame text-white px-12 py-6 rounded-xl text-xl font-bold shadow-2xl shadow-orange-700/30 hover:shadow-orange-600/50 transition">
+      <a href="contact.html" class="btn-consult btn-flame text-white">
         Get Your Free Consultation
       </a>
     </div>
   </section>
 
-<footer class="bg-black text-white py-12 border-t border-orange-900/50">
-  <div class="container mx-auto px-6 text-center">
-    <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/> 
-    <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
-    <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing • Video Editing</p>
-    <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
-  </div>
-</footer>
+  <footer class="bg-black text-white py-12 border-t border-orange-900/50">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/> 
+      <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing • Video Editing</p>
+      <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // ────────────────────────────────────────────────
   // Mobile hamburger menu
-  // ────────────────────────────────────────────────
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileClose  = document.getElementById('mobile-close');
   const mobileMenu   = document.getElementById('mobile-menu');
@@ -284,15 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileClose.addEventListener('click', closeMobile);
     overlay.addEventListener('click', closeMobile);
 
-    // Close mobile menu when any link inside is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeMobile);
     });
   }
 
-  // ────────────────────────────────────────────────
-  // Desktop "More" dropdown – single click toggle
-  // ────────────────────────────────────────────────
+  // Desktop "More" dropdown
   const moreToggle   = document.getElementById('more-toggle');
   const moreDropdown = document.getElementById('more-dropdown');
   const moreIcon     = document.getElementById('more-icon');
@@ -316,7 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
     moreToggle.addEventListener('click', toggleMore);
     document.addEventListener('click', closeMore);
 
-    // Close dropdown when clicking any link inside it
     moreDropdown.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
@@ -325,13 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Optional: log when script is ready (for debugging)
   console.log('Header navigation script loaded');
 });
 </script>
 
 </body>
-
 </html>
-
-
