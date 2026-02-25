@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Team | Ruacheon – Spirited Digital Solutions</title>
+  <meta name="description" content="Meet the passionate team behind Ruacheon — specialists in web design, landing pages, graphics, logos, email marketing, branding, and growth."/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+    .flame-gradient {
+      background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn-flame {
+      background: linear-gradient(to right, #ff4500, #ff8c00);
+    }
+    .btn-flame:hover {
+      background: linear-gradient(to right, #ff6347, #ffb347);
+    }
+    nav a.active {
+      color: #ff8c00 !important;
+      font-weight: 700;
+      border-bottom: 2px solid #ff4500;
+    }
+
+    /* Video background */
+    #video-bg {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: -1;
+    }
+
+    .team-member-card {
+      background: rgba(17, 17, 17, 0.75);
+      border: 1px solid rgba(255, 140, 0, 0.2);
+      border-radius: 1.5rem;
+      padding: 4rem 2.5rem;
+      margin-bottom: 6rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .team-member-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 70px rgba(255, 69, 0, 0.3);
+      border-color: #ff8c00;
+    }
+    .team-photo {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 8px solid rgba(255, 140, 0, 0.3);
+      margin-bottom: 2rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 1.5rem 0 2.5rem;
+    }
+    .social-row a {
+      color: #ff8c00;
+      transition: all 0.3s ease;
+    }
+    .social-row a:hover {
+      color: #ffd700;
+      transform: translateY(-3px) scale(1.2);
+    }
+    .bio-text {
+      text-align: left;
+      line-height: 1.8;
+      font-size: 1.125rem;
+      max-width: 80ch;
+      margin: 0 auto;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+    .bio-text.collapsed {
+      max-height: 220px; /* shows only first part */
+    }
+    .read-more {
+      color: #ff8c00;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+    .read-more:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .bio-text {
+        text-align: left !important;
+      }
+      .team-member-card {
+        padding: 3rem 1.5rem;
+      }
+      .team-photo {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+<!-- Header / Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo & Brand -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+        <div class="flex flex-col">
+          <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+          <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+        <!-- More Dropdown – click to toggle -->
+        <div class="relative">
+          <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+            More
+            <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+            <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+            <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+            <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+          Contact Us
+        </a>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+  <div class="p-6 flex flex-col h-full text-white">
+    <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+    
+    <nav class="flex flex-col gap-6 text-lg font-medium">
+      <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+      <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+      <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+      <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+      <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+      <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+      <a href="team.html" class="hover:text-orange-400 transition py-2">Team</a>
+      <a href="hire us.html" class="hover:text-orange-400 transition py-2">Hire Us</a>
+      <a href="testimonial.html" class="hover:text-orange-400 transition py-2">Testimonial</a>
+      
+      <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+        Contact Us
+      </a>
+    </nav>
+  </div>
+</div>
+
+<div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+
+  <section class="py-32 md:py-40 bg-gradient-to-b from-black via-gray-950/80 to-black">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-7xl font-extrabold flame-gradient mb-8">Our Team</h1>
+      <p class="text-xl md:text-2xl text-orange-300/90 max-w-3xl mx-auto">
+        The passionate experts who bring Ruacheon’s vision to life with creativity, precision, and relentless drive.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Members -->
+  <section class="py-24">
+    <div class="container mx-auto px-6">
+
+      <!-- Balogun Enoch -->
+      <div class="team-member-card">
+        <div class="flex flex-col items-center text-center">
+          <img src="images/My Profile 1.png" alt="Balogun Enoch" class="team-photo">
+          <h3 class="text-4xl md:text-5xl font-bold flame-gradient mb-4">Balogun Enoch</h3>
+          <p class="text-orange-300 text-2xl font-medium mb-3">Head of Department @ Ruach_Eon</p>
+          <p class="text-gray-400 text-xl mb-8">Web & Landing Page Specialist</p>
+
+          <div class="social-row">
+            <a href="https://x.com/Ruach_Eon" target="_blank" title="X / Twitter">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/balogun-enoch" target="_blank" title="LinkedIn">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+
+          <div class="bio-text collapsed" id="bio-1">
+            Balogun Enoch is the visionary Head of Department (HOD) at Ruach_Eon and the principal Web Design & Landing Page Specialist. He leads the strategic and technical direction of all digital projects, ensuring each website and landing page delivers exceptional performance, seamless user experience, and significant business impact. Balogun is a master of modern front-end development, specializing in Next.js, React, Tailwind CSS, TypeScript, and Framer Motion to build fast, accessible, SEO-first, and conversion-optimized digital experiences.
+            <br><br>
+            He architects solutions that consistently achieve elite Core Web Vitals scores (LCP < 1.8s, FID < 100ms, CLS < 0.05), designs high-conversion layouts using proven psychology-based principles (trust signals, urgency triggers, social proof, clear CTAs), and drives continuous improvement through rigorous A/B testing, heatmapping, scroll tracking, and user behavior analysis.
+            <br><br>
+            Balogun integrates headless CMS platforms (Sanity, Contentful), payment gateways (Stripe), CRM tools (HubSpot, Salesforce), advanced analytics (Google Analytics 4, PostHog), and marketing automation systems. He enforces WCAG 2.2 AA+ accessibility compliance, cross-browser/device compatibility, and performance best practices (lazy loading, WebP/AVIF images, edge caching).
+            <br><br>
+            As a leader, he mentors junior developers, collaborates closely with designers, copywriters, and marketers, and delivers pixel-perfect, scalable websites that transform visitor traffic into measurable revenue growth — often achieving 40–80% conversion uplifts for clients through strategic design and relentless optimization.
+          </div>
+          <span class="read-more text-orange-400 text-sm font-medium flex items-center gap-1" data-bio="1">
+            Read More <span class="text-xl">↓</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Ayomide Kolawole -->
+      <div class="team-member-card">
+        <div class="flex flex-col items-center text-center">
+          <img src="images/Ayomide.jpg" alt="Ayomide Kolawole" class="team-photo">
+          <h3 class="text-4xl md:text-5xl font-bold flame-gradient mb-4">Ayomide Kolawole</h3>
+          <p class="text-orange-300 font-medium text-2xl mb-3">Graphics & Logo Design Specialist</p>
+
+          <div class="social-row">
+            <a href="https://x.com/ayomide_kola" target="_blank" title="X / Twitter">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/ayomide-kolawole" target="_blank" title="LinkedIn">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+
+          <div class="bio-text collapsed" id="bio-2">
+            Ayomide Kolawole is Ruacheon’s principal Graphics & Logo Design Specialist, responsible for creating powerful, cohesive, and emotionally resonant visual identities that help brands differentiate, build trust, and leave lasting impressions in competitive markets.
+            <br><br>
+            Ayomide’s comprehensive creative process includes designing distinctive, versatile logos (minimalist wordmarks, symbolic icons, monograms, combination marks) that scale beautifully across all mediums. He develops complete brand identity systems — primary/secondary color palettes, typography hierarchies, usage rules, mood boards, and comprehensive brand books — ensuring every touchpoint reflects the brand’s personality and values.
+            <br><br>
+            He produces high-impact social media assets (Instagram/Facebook/Twitter post templates, stories, reels covers, highlight icons), crafts packaging designs, product labels, business cards, flyers, banners, brochures, and all print collateral, and creates motion graphics, animated logos, brand intro videos, and short animated assets for digital campaigns.
+            <br><br>
+            Ayomide ensures strict visual consistency across web, social, email, print, packaging, signage, and merchandise while collaborating closely with web developers, copywriters, and marketing teams to align visuals with user experience, messaging, and campaign objectives.
+            <br><br>
+            He masterfully blends contemporary design trends (retro-futurism, maximalism, AI-generated textures, glassmorphism, bold typography) with timeless principles — simplicity, scalability, negative space mastery, and emotional storytelling — resulting in assets that elevate brand recognition, perceived value, customer connection, and market positioning for Ruacheon clients.
+          </div>
+          <span class="read-more text-orange-400 text-sm font-medium flex items-center gap-1" data-bio="2">
+            Read More <span class="text-xl">↓</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Samuel Oluwabiyi -->
+      <div class="team-member-card">
+        <div class="flex flex-col items-center text-center">
+          <img src="images/Samuel.jpg" alt="Samuel Oluwabiyi" class="team-photo">
+          <h3 class="text-4xl md:text-5xl font-bold flame-gradient mb-4">Samuel Oluwabiyi</h3>
+          <p class="text-orange-300 font-medium text-2xl mb-3">Email Marketing & Growth Specialist</p>
+
+          <div class="social-row">
+            <a href="https://x.com/samuel_growth" target="_blank" title="X / Twitter">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/samuel-oluwabiyi" target="_blank" title="LinkedIn">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+
+          <div class="bio-text collapsed" id="bio-3">
+            Samuel Oluwabiyi is Ruacheon’s Email Marketing & Growth Specialist, focused on turning email into one of the most powerful, scalable, and profitable channels for clients. He designs and executes full-funnel email strategies that acquire new customers, nurture leads, recover lost revenue, increase average order value, reduce churn, and drive long-term business growth.
+            <br><br>
+            Samuel’s core areas of expertise include architecting high-converting email sequences (welcome series, educational nurture flows, promotional campaigns, abandoned cart recovery, win-back, post-purchase upsell/cross-sell), implementing advanced segmentation using behavioral data (browsing/purchase history), zero-party data (quizzes, preference centers), and RFM analysis, and creating interactive AMP emails with polls, carousels, countdown timers, product recommendations, and in-email checkout experiences.
+            <br><br>
+            He designs sophisticated automation workflows using Klaviyo, ActiveCampaign, Make.com, and custom integrations, maximizes deliverability through IP/domain warm-up, authentication setup (DKIM, SPF, DMARC), list hygiene, suppression lists, and spam trap monitoring, and runs large-scale A/B/n tests on subject lines, preheaders, send times, copy tone, personalization level, design layout, and offer structure.
+            <br><br>
+            Samuel analyzes key performance metrics (open rate, CTR, conversion rate, revenue per recipient, unsubscribe rate, spam complaints) and iterates weekly for continuous improvement. With a data-driven, customer-centric approach, he consistently delivers open rates of 35–50%, click-through rates of 5–12%, and strong ROI by combining persuasive copywriting, behavioral psychology, technical optimization, and strategic timing.
+          </div>
+          <span class="read-more text-orange-400 text-sm font-medium flex items-center gap-1" data-bio="3">
+            Read More <span class="text-xl">↓</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- NEW: Kolawole Oluwatosin - Video Editor -->
+      <div class="team-member-card">
+        <div class="flex flex-col items-center text-center">
+          <img src="images/Oluwatosin.jpg" alt="Kolawole Oluwatosin" class="team-photo">
+          <h3 class="text-4xl md:text-5xl font-bold flame-gradient mb-4">Kolawole Oluwatosin</h3>
+          <p class="text-orange-300 font-medium text-2xl mb-3">Video Editor & Motion Designer</p>
+
+          <div class="social-row">
+            <a href="https://x.com/kolawole_oluwa" target="_blank" title="X / Twitter">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/kolawole-oluwatosin" target="_blank" title="LinkedIn">
+              <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+
+          <div class="bio-text collapsed" id="bio-4">
+            Kolawole Oluwatosin is Ruacheon’s dedicated Video Editor and Motion Designer, bringing stories to life through cinematic visuals, smooth transitions, and captivating storytelling. He is a certified professional in Premiere Pro, Filmora, CapCut, PowerDirector, and KineMaster, giving him mastery over both professional and mobile-first editing workflows.
+            <br><br>
+            With a keen eye for pacing, color grading, sound design, and visual effects, Kolawole creates high-energy reels, brand storytelling videos, promotional campaigns, explainer videos, and social media content that consistently drive engagement and conversions.
+            <br><br>
+            Whether working on fast-paced TikTok/Instagram Reels or polished corporate videos, he combines technical precision with creative flair to deliver content that not only looks premium but also resonates emotionally with audiences. His ability to work across multiple platforms and deliver under tight deadlines makes him an invaluable asset to the Ruacheon team.
+            <br><br>
+            Kolawole is passionate about turning raw footage into powerful visual narratives that help brands stand out in today’s fast-moving digital landscape.
+          </div>
+          <span class="read-more text-orange-400 text-sm font-medium flex items-center gap-1" data-bio="4">
+            Read More <span class="text-xl">↓</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-black text-white py-20 border-t border-orange-900/50">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-28 mx-auto mb-10 opacity-90"/>
+      <p class="text-orange-400 font-medium text-2xl mb-6">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-12 text-xl">Web • Landing Pages • Graphics • Logos • Email Marketing • Video Editing</p>
+      <p class="text-base text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Mobile Menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose  = document.getElementById('mobile-close');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const overlay      = document.getElementById('overlay');
+
+    if (mobileToggle && mobileMenu && overlay) {
+      const openMobile = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeMobile = () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+
+      mobileToggle.addEventListener('click', openMobile);
+      mobileClose.addEventListener('click', closeMobile);
+      overlay.addEventListener('click', closeMobile);
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobile);
+      });
+    }
+
+    // Desktop "More" dropdown
+    const moreToggle   = document.getElementById('more-toggle');
+    const moreDropdown = document.getElementById('more-dropdown');
+    const moreIcon     = document.getElementById('more-icon');
+
+    if (moreToggle && moreDropdown) {
+      const toggleMore = (event) => {
+        event.stopPropagation();
+        moreDropdown.classList.toggle('hidden');
+        moreDropdown.classList.toggle('opacity-0');
+        moreDropdown.classList.toggle('scale-95');
+        moreIcon.classList.toggle('rotate-180');
+      };
+
+      const closeMore = (event) => {
+        if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        }
+      };
+
+      moreToggle.addEventListener('click', toggleMore);
+      document.addEventListener('click', closeMore);
+
+      moreDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        });
+      });
+    }
+
+    // Read More for Biographies
+    document.querySelectorAll('.read-more').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const bioId = btn.getAttribute('data-bio');
+        const bio = document.getElementById('bio-' + bioId);
+
+        if (bio.classList.contains('collapsed')) {
+          bio.classList.remove('collapsed');
+          btn.innerHTML = `Read Less <span class="text-xl">↑</span>`;
+        } else {
+          bio.classList.add('collapsed');
+          btn.innerHTML = `Read More <span class="text-xl">↓</span>`;
+        }
+      });
+    });
+
+    console.log('Team page loaded with new Video Editor – all optimized');
+  });
+  </script>
+</body>
+</html>

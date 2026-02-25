@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testimonials • Ruacheon – Spirited Solutions</title>
+  <meta name="description" content="Hear what our clients say about working with Ruacheon – custom websites, landing pages, graphics, flyers, portfolios, newsletters and YouTube growth."/>
+  <meta name="keywords" content="Ruacheon testimonials, client reviews, web design feedback, graphics design, flyer design, YouTube growth, newsletter design"/>
+  <meta property="og:title" content="Testimonials – Ruacheon"/>
+  <meta property="og:description" content="Real words from real clients about real results."/>
+  <meta property="og:image" content="ruacheon-logo.png"/>
+  <meta property="og:url" content="#"/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body { 
+      font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+      background: #0a0a0a; 
+      color: #e0e0e0; 
+      scroll-behavior: smooth; 
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 { color: #ffffff; }
+    .flame-gradient { 
+      background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+      background-clip: text; 
+    }
+    .btn-flame { 
+      background: linear-gradient(to right, #ff4500, #ff8c00); 
+      transition: all 0.3s ease;
+    }
+    .btn-flame:hover { 
+      background: linear-gradient(to right, #ff6347, #ffb347); 
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255,69,0,0.4);
+    }
+
+    /* Testimonial card */
+    .testimonial-card {
+      background: rgba(17,17,17,0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,69,0,0.2);
+      border-radius: 1.25rem;
+      padding: 2rem 1.75rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(255,69,0,0.6);
+      box-shadow: 0 25px 60px rgba(255,69,0,0.25);
+    }
+
+    .client-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff8c00;
+      box-shadow: 0 6px 20px rgba(255,140,0,0.4);
+    }
+
+    .stars {
+      color: #ffd700;
+      font-size: 1.4rem;
+      margin: 1rem 0;
+    }
+
+    .client-name {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .client-role {
+      color: #ff8c00;
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Video background */
+    #video-bg {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
+
+    /* Grid spacing */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .testimonial-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ─── Mobile Menu ──────────────────────────────────────────────── */
+    #mobile-menu {
+      position: fixed;
+      top: 0; right: 0;
+      width: 80%;
+      max-width: 320px;
+      height: 100%;
+      background: rgba(0,0,0,0.96);
+      backdrop-filter: blur(10px);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 9999;
+      overflow-y: auto;
+    }
+
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    #overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Smooth scroll padding for fixed header */
+    :target {
+      scroll-margin-top: 5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-[1000] bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+            <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+          <a href="index.html" class="hover:text-orange-400 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+          <a href="services.html" class="hover:text-orange-400 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+          <a href="portfolio.html" class="hover:text-orange-400 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+          <a href="pricing.html" class="hover:text-orange-400 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+          <a href="about.html" class="hover:text-orange-400 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+          <a href="blog.html" class="hover:text-orange-400 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+          <div class="relative">
+            <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors focus:outline-none">
+              More
+              <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+              <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+              <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+              <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+            </div>
+          </div>
+
+          <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none z-[1001]">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Slide-in Menu -->
+  <div id="mobile-menu" class="lg:hidden">
+    <div class="p-6 flex flex-col gap-5 text-white text-lg font-medium">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-xl font-bold flame-gradient">Menu</span>
+        <button id="mobile-close" class="text-4xl font-light hover:text-orange-400 transition">&times;</button>
+      </div>
+      <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+      <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+      <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+      <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+      <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+      <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+      <hr class="border-orange-900/50 my-2">
+      <a href="team.html" class="hover:text-orange-400 transition py-2">Team</a>
+      <a href="hire us.html" class="hover:text-orange-400 transition py-2">Hire Us</a>
+      <a href="testimonial.html" class="hover:text-orange-400 transition py-2">Testimonial</a>
+      <a href="contact.html" class="mt-4 inline-block px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+        Contact Us
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Main Content -->
+  <main class="relative z-10 py-24 md:py-32 lg:py-40">
+    <div class="container mx-auto px-6">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-10 md:mb-16 flame-gradient">
+        Client Testimonials
+      </h1>
+      <p class="text-lg sm:text-xl md:text-2xl text-center text-gray-300 mb-16 md:mb-24 max-w-4xl mx-auto">
+        Real feedback from real clients I've helped grow their brands, channels, and online presence.
+      </p>
+
+      <div class="testimonial-grid">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Ruach_Eon designed and delivered a clean, modern, high-converting website that perfectly represents my personal brand as a social media strategist. The attention to detail and speed of delivery were impressive. He handles everything efficiently and was available for any questions.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=Adex+Johnson&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="Adex_Johnson" class="client-avatar">
+            <div>
+              <h3 class="client-name">Adex_Johnson</h3>
+              <p class="client-role">Social Media Prognisticator</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Another excellent website from Ruach_Eon. Fast, responsive, and built exactly to my vision. Highly recommend if you want a professional online presence that converts visitors into followers.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=Tobmore&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="Tobmore" class="client-avatar">
+            <div>
+              <h3 class="client-name">Tobmore</h3>
+              <p class="client-role">Social Media Prognisticator</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Ruach_Eon has designed many flyers for me — always on time, creative, eye-catching, and very effective. My promotions now look premium and get much better engagement and response.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=Officer+Kola&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="Officer Kola" class="client-avatar">
+            <div>
+              <h3 class="client-name">Officer Kola</h3>
+              <p class="client-role">Content Creator / Brand</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Ruach_Eon built my portfolio website from scratch. It's sleek, fast-loading, and showcases my graphic design work beautifully. It's now the centerpiece of my brand and attracts new clients regularly.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=A.M.+Design&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="A.M. Design" class="client-avatar">
+            <div>
+              <h3 class="client-name">A.M. Design</h3>
+              <p class="client-role">Graphic Designer</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Working with Ruach_Eon improved my newsletter design, layout and structure significantly. Open rates and engagement went up noticeably after the changes. Professional, detail-oriented and easy to work with.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=Paul+Barnett&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="Paul Barnett" class="client-avatar">
+            <div>
+              <h3 class="client-name">Paul Barnett</h3>
+              <p class="client-role">Newsletter Creator</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Ruach_Eon helped increase my channel's visibility and reach. Smart strategies combined with great-looking channel art and thumbnails = faster growth. Really happy with the results and support.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=Uncanny+Dog&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="Uncanny Dog" class="client-avatar">
+            <div>
+              <h3 class="client-name">Uncanny Dog</h3>
+              <p class="client-role">YouTuber</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 7 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Massive thanks to Ruach_Eon — better thumbnails, channel art, and engagement tactics helped my channel grow faster and keep viewers watching longer. Results speak for themselves.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=Lava&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="Lava" class="client-avatar">
+            <div>
+              <h3 class="client-name">Lava</h3>
+              <p class="client-role">YouTuber</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 8 -->
+        <div class="testimonial-card">
+          <p class="text-base md:text-lg leading-relaxed mb-6">
+            Ruach_Eon created my professional website from scratch and designed high-converting flyers. My promotions now look premium and the results have improved dramatically. Highly recommended.
+          </p>
+          <div class="stars flame-gradient">★★★★★</div>
+          <div class="flex items-center gap-4 mt-6">
+            <img src="https://ui-avatars.com/api/?name=SamPro&background=FF4500&color=fff&size=128&rounded=true&bold=true" alt="SamPro" class="client-avatar">
+            <div>
+              <h3 class="client-name">SamPro</h3>
+              <p class="client-role">Social Media Promoter</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12 border-t border-orange-900/50 relative z-10">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/>
+      <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing</p>
+      <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // ─── Mobile Menu ────────────────────────────────────────────────
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const mobileClose  = document.getElementById('mobile-close');
+    const overlay      = document.getElementById('overlay');
+
+    if (mobileToggle && mobileMenu && mobileClose && overlay) {
+      const openMenu = () => {
+        mobileMenu.classList.add('open');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeMenu = () => {
+        mobileMenu.classList.remove('open');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+      };
+
+      mobileToggle.addEventListener('click', openMenu);
+      mobileClose.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', closeMenu);
+
+      // Close when clicking links
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+    }
+
+    // ─── Desktop "More" dropdown ───────────────────────────────────
+    const moreToggle   = document.getElementById('more-toggle');
+    const moreDropdown = document.getElementById('more-dropdown');
+    const moreIcon     = document.getElementById('more-icon');
+
+    if (moreToggle && moreDropdown && moreIcon) {
+      const toggleMore = (event) => {
+        event.stopPropagation();
+        moreDropdown.classList.toggle('hidden');
+        moreDropdown.classList.toggle('opacity-0');
+        moreDropdown.classList.toggle('scale-95');
+        moreIcon.classList.toggle('rotate-180');
+      };
+
+      const closeMore = (event) => {
+        if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        }
+      };
+
+      moreToggle.addEventListener('click', toggleMore);
+      document.addEventListener('click', closeMore);
+
+      moreDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        });
+      });
+    }
+
+    console.log('Page loaded – mobile menu should now work');
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Marketing | Ruacheon Portfolio</title>
+  <meta name="description" content="High-performing email sequences, newsletters, automations and campaigns by Ruacheon."/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+    .flame-gradient {
+      background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn-flame {
+      background: linear-gradient(to right, #ff4500, #ff8c00);
+    }
+    .btn-flame:hover {
+      background: linear-gradient(to right, #ff6347, #ffb347);
+    }
+    nav a.active {
+      color: #ff8c00 !important;
+      font-weight: 700;
+      border-bottom: 2px solid #ff4500;
+    }
+
+    #video-bg {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    @media (min-width: 640px) { 
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; } 
+    }
+    @media (min-width: 1024px) { 
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } 
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.25rem;
+      box-shadow: 0 10px 25px rgba(255,69,0,0.12);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      aspect-ratio: 1 / 1;           /* perfect square – all cards equal size */
+      width: 100%;
+      background: #111;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px rgba(255,69,0,0.28);
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 1.5rem;
+      transition: transform 0.6s ease;
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .portfolio-item:hover .overlay {
+      opacity: 1;
+    }
+
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox img {
+      max-width: 95%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 140, 0, 0.1);
+      color: #ff8c00;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 140, 0, 0.3);
+    }
+    .back-btn:hover {
+      background: rgba(255, 140, 0, 0.2);
+      transform: translateX(-4px);
+      box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+            <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+          <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+          <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+          <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+          <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+          <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+          <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+          <div class="relative">
+            <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+              More
+              <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+              <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+              <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+              <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+            </div>
+          </div>
+
+          <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+            Contact Us
+          </a>
+        </nav>
+
+        <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+    <div class="p-6 flex flex-col h-full text-white">
+      <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+      
+      <nav class="flex flex-col gap-6 text-lg font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+        
+        <div class="border-t border-orange-900/40 my-4 pt-4">
+          <a href="team.html" class="hover:text-orange-400 transition block py-2">Team</a>
+          <a href="hire us.html" class="hover:text-orange-400 transition block py-2">Hire Us</a>
+          <a href="testimonial.html" class="hover:text-orange-400 transition block py-2">Testimonial</a>
+        </div>
+        
+        <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+          Contact Us
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+
+  <!-- Hero with Back Button -->
+  <section class="py-20 md:py-28 bg-gradient-to-b from-black via-gray-950 to-black">
+    <div class="container mx-auto px-6 text-center">
+      <a href="portfolio.html" class="back-btn mb-6 inline-flex items-center">
+        ← Back to Portfolio
+      </a>
+      <h1 class="text-5xl md:text-6xl font-extrabold flame-gradient mb-6">Email Marketing</h1>
+      <p class="text-xl md:text-2xl text-orange-300 mb-10">
+        High-performing sequences, newsletters, automations and campaigns
+      </p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="portfolio-grid">
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro2.jpg">
+          <img src="Email Marketing/Bro2.jpg" alt="Email Design 1"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Warm Welcome Flow</h3>
+            <p class="text-orange-300">Inviting first impression</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro3.jpg">
+          <img src="Email Marketing/Bro3.jpg" alt="Email Design 2"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Fresh Weekly Pulse</h3>
+            <p class="text-orange-300">Consistent connection</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 4.jpg">
+          <img src="Email Marketing/Bro 4.jpg" alt="Email Design 3"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Gentle Reminder Glow</h3>
+            <p class="text-orange-300">Soft re-engagement</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 5.jpg">
+          <img src="Email Marketing/Bro 5.jpg" alt="Email Design 4"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Bright Offer Spark</h3>
+            <p class="text-orange-300">Exciting opportunity</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 6.jpg">
+          <img src="Email Marketing/Bro 6.jpg" alt="Email Design 5"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Calm Trust Builder</h3>
+            <p class="text-orange-300">Steady relationship</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 7.jpg">
+          <img src="Email Marketing/Bro 7.jpg" alt="Email Design 6"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Bold Value Highlight</h3>
+            <p class="text-orange-300">Clear benefit focus</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 8.jpg">
+          <img src="Email Marketing/Bro 8.jpg" alt="Email Design 7"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Smooth Journey Step</h3>
+            <p class="text-orange-300">Guided progression</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 9.jpg">
+          <img src="Email Marketing/Bro 9.jpg" alt="Email Design 8"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Cozy Update Vibe</h3>
+            <p class="text-orange-300">Friendly refresh</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 11.jpg">
+          <img src="Email Marketing/Bro 11.jpg" alt="Email Design 10"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Quiet Confidence Note</h3>
+            <p class="text-orange-300">Subtle authority</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 12.jpg">
+          <img src="Email Marketing/Bro 12.jpg" alt="Email Design 11"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Energetic Call Spark</h3>
+            <p class="text-orange-300">Motivational push</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 13.jpg">
+          <img src="Email Marketing/Bro 13.jpg" alt="Email Design 12"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Gentle Nudge Touch</h3>
+            <p class="text-orange-300">Soft encouragement</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 14.jpg">
+          <img src="Email Marketing/Bro 14.jpg" alt="Email Design 13"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Bright Discovery Wave</h3>
+            <p class="text-orange-300">Exciting reveal</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 15.jpg">
+          <img src="Email Marketing/Bro 15.jpg" alt="Email Design 14"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Steady Loyalty Link</h3>
+            <p class="text-orange-300">Lasting connection</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 16.jpg">
+          <img src="Email Marketing/Bro 16.jpg" alt="Email Design 15"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Vibrant Reward Glow</h3>
+            <p class="text-orange-300">Grateful appreciation</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 17.jpg">
+          <img src="Email Marketing/Bro 17.jpg" alt="Email Design 16"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Calm Reflection Note</h3>
+            <p class="text-orange-300">Thoughtful pause</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Bro 18.jpg">
+          <img src="Email Marketing/Bro 18.jpg" alt="Email Design 17"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Dynamic Next Step</h3>
+            <p class="text-orange-300">Forward momentum</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Menu.jpg">
+          <img src="Email Marketing/Menu.jpg" alt="Email Design 18"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Crisp Choice Moment</h3>
+            <p class="text-orange-300">Clear decision prompt</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/travel.jpg">
+          <img src="Email Marketing/travel.jpg" alt="Email Design 19"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Dreamy Escape Call</h3>
+            <p class="text-orange-300">Inspiring wanderlust</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Travel 2.jpg">
+          <img src="Email Marketing/Travel 2.jpg" alt="Email Design 20"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Serene Journey Hint</h3>
+            <p class="text-orange-300">Peaceful invitation</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Travel 3.jpg">
+          <img src="Email Marketing/Travel 3.jpg" alt="Email Design 21"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Vivid Horizon Pull</h3>
+            <p class="text-orange-300">Adventure spark</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Travel 4.png">
+          <img src="Email Marketing/Travel 4.png" alt="Email Design 22"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 1.jpg">
+          <img src="Email Marketing/Email 1.jpg" alt="Email Design 23"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 2.jpg">
+          <img src="Email Marketing/Email 2.jpg" alt="Email Design 25"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 3.jpg">
+          <img src="Email Marketing/Email 3.jpg" alt="Email Design 26"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 4.jpg">
+          <img src="Email Marketing/Email 4.jpg" alt="Email Design 27"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 5.jpg">
+          <img src="Email Marketing/Email 5.jpg" alt="Email Design 28"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 6.jpg">
+          <img src="Email Marketing/Email 6.jpg" alt="Email Design 29"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Email Marketing/Email 7.jpg">
+          <img src="Email Marketing/Email 7.jpg" alt="Email Design 30"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Open Road Whisper</h3>
+            <p class="text-orange-300">Quiet exploration vibe</p>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- Bottom CTA + Back Button -->
+      <div class="mt-20 text-center space-y-8">
+        <a href="contact.html" class="btn-flame text-white px-12 py-6 rounded-xl text-xl font-bold shadow-xl hover:shadow-orange-500/50 transition inline-block">
+          Ready to bring your vision to life? Contact us →
+        </a>
+        <div>
+          <a href="portfolio.html" class="back-btn inline-flex items-center text-lg">
+            ← Back to Portfolio Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-screen Lightbox (no project button) -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-content-center">
+    <button id="close-btn" class="absolute top-6 right-6 text-white text-5xl font-light hover:text-orange-400 transition z-60">×</button>
+    <div class="relative w-full max-w-6xl px-4">
+      <img id="lightbox-img" src="" alt="Full View" class="max-h-[85vh] max-w-full object-contain mx-auto rounded-lg shadow-2xl">
+    </div>
+    <button id="prev-btn" class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-white text-6xl font-light hover:text-orange-400 transition">‹</button>
+    <button id="next-btn" class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-white text-6xl font-light hover:text-orange-400 transition">›</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12 border-t border-orange-900/50">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/>
+      <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing</p>
+      <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Mobile Menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose  = document.getElementById('mobile-close');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const overlay      = document.getElementById('overlay');
+
+    if (mobileToggle && mobileMenu && overlay) {
+      const openMobile = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeMobile = () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+
+      mobileToggle.addEventListener('click', openMobile);
+      mobileClose.addEventListener('click', closeMobile);
+      overlay.addEventListener('click', closeMobile);
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobile);
+      });
+    }
+
+    // Desktop "More" dropdown
+    const moreToggle   = document.getElementById('more-toggle');
+    const moreDropdown = document.getElementById('more-dropdown');
+    const moreIcon     = document.getElementById('more-icon');
+
+    if (moreToggle && moreDropdown) {
+      const toggleMore = (event) => {
+        event.stopPropagation();
+        moreDropdown.classList.toggle('hidden');
+        moreDropdown.classList.toggle('opacity-0');
+        moreDropdown.classList.toggle('scale-95');
+        moreIcon.classList.toggle('rotate-180');
+      };
+
+      const closeMore = (event) => {
+        if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        }
+      };
+
+      moreToggle.addEventListener('click', toggleMore);
+      document.addEventListener('click', closeMore);
+
+      moreDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        });
+      });
+    }
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    let currentIndex = 0;
+    const items = [];
+
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    portfolioItems.forEach((item, index) => {
+      items.push({
+        full: item.dataset.full || item.querySelector('img').src,
+        title: item.dataset.title || 'Email Mockup'
+      });
+
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentIndex = index;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      const current = items[currentIndex];
+      lightboxImg.src = current.full;
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      openLightbox();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      openLightbox();
+    });
+
+    // Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextBtn.click();
+      if (touchEndX - touchStartX > 50) prevBtn.click();
+    });
+
+    console.log('Email Marketing portfolio ready – mobile menu & swipe lightbox working, no project button');
+  });
+  </script>
+</body>
+</html>

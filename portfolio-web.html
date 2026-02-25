@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Design & Landing Pages | Ruacheon Portfolio</title>
+  <meta name="description" content="Custom websites and high-converting landing pages built for real business results by Ruacheon."/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+    .flame-gradient {
+      background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn-flame {
+      background: linear-gradient(to right, #ff4500, #ff8c00);
+    }
+    .btn-flame:hover {
+      background: linear-gradient(to right, #ff6347, #ffb347);
+    }
+
+    #video-bg {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
+    }
+    @media (min-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    }
+    @media (min-width: 1280px) {
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.25rem;
+      box-shadow: 0 10px 25px rgba(255,69,0,0.12);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
+      background: #111;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px rgba(255,69,0,0.28);
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease;
+      text-align: center;
+      padding: 1rem;
+    }
+    .portfolio-item:hover .overlay {
+      opacity: 1;
+    }
+
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox img {
+      max-width: 96%;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    #lightbox-link {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 69, 0, 0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: white;
+      padding: 0.75rem 1.8rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(255,69,0,0.45);
+      border: 1px solid rgba(255,140,0,0.7);
+      pointer-events: auto;
+      opacity: 1;
+      white-space: nowrap;
+    }
+    #lightbox-link:hover {
+      background: rgba(255, 69, 0, 0.70);
+      transform: translateX(-50%) translateY(-4px);
+      box-shadow: 0 10px 30px rgba(255,69,0,0.6);
+      border-color: rgba(255,140,0,0.9);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 140, 0, 0.1);
+      color: #ff8c00;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 140, 0, 0.3);
+      font-size: 0.95rem;
+    }
+    .back-btn:hover {
+      background: rgba(255, 140, 0, 0.2);
+      transform: translateX(-5px);
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.5rem; line-height: 1.1; }
+      .portfolio-item { border-radius: 1rem; }
+      .overlay h3 { font-size: 1.4rem; }
+      .overlay p { font-size: 0.9rem; }
+      #lightbox-link { font-size: 0.95rem; padding: 0.65rem 1.5rem; bottom: 2rem; }
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+            <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+          <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+          <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+          <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+          <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+          <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+          <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+          <div class="relative">
+            <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+              More
+              <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+              <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+              <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+              <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+            </div>
+          </div>
+
+          <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+            Contact Us
+          </a>
+        </nav>
+
+        <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+    <div class="p-6 flex flex-col h-full text-white">
+      <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+      
+      <nav class="flex flex-col gap-6 text-lg font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+        
+        <div class="border-t border-orange-900/40 my-4 pt-4">
+          <a href="team.html" class="hover:text-orange-400 transition block py-2">Team</a>
+          <a href="hire us.html" class="hover:text-orange-400 transition block py-2">Hire Us</a>
+          <a href="testimonial.html" class="hover:text-orange-400 transition block py-2">Testimonial</a>
+        </div>
+        
+        <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+          Contact Us
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+
+  <!-- Hero -->
+  <section class="py-16 md:py-24 lg:py-28 bg-gradient-to-b from-black via-gray-950 to-black">
+    <div class="container mx-auto px-5 sm:px-6 text-center">
+      <a href="portfolio.html" class="back-btn mb-6 inline-flex items-center">
+        ← Back to Portfolio
+      </a>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold flame-gradient mb-5 leading-tight">Web Design & Landing Pages</h1>
+      <p class="text-lg sm:text-xl md:text-2xl text-orange-300 max-w-4xl mx-auto">
+        Custom websites and high-converting landing pages built for real business results
+      </p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="container mx-auto px-5 sm:px-6 lg:px-8">
+      <div class="portfolio-grid">
+
+        <div class="portfolio-item" data-full="Web/Web 1.png" data-url="https://example.com/saas-dashboard">
+          <img src="Web/Web 1.png" alt="SaaS Dashboard" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">SaaS Analytics Dashboard</h3>
+            <p class="text-orange-300 text-sm md:text-base">Modern data visualization & clean UX</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 2.png" data-url="https://example.com/ecommerce">
+          <img src="Web/Web 2.png" alt="Fashion E-commerce" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Fashion E-commerce Platform</h3>
+            <p class="text-orange-300 text-sm md:text-base">High-conversion product pages</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 3.png" data-url="https://example.com/fintech">
+          <img src="Web/Web 3.png" alt="Fintech App" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Fintech Mobile Banking</h3>
+            <p class="text-orange-300 text-sm md:text-base">Secure & intuitive interface</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 4.png" data-url="https://example.com/real-estate">
+          <img src="Web/Web 4.png" alt="Real Estate Portal" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Luxury Real Estate Portal</h3>
+            <p class="text-orange-300 text-sm md:text-base">Immersive property showcase</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 5.png" data-url="https://example.com/healthtech">
+          <img src="Web/Web 5.png" alt="HealthTech Platform" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Telemedicine Platform</h3>
+            <p class="text-orange-300 text-sm md:text-base">Patient-first design & booking flow</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 6.png" data-url="https://example.com/crypto">
+          <img src="Web/Web 6.png" alt="Crypto Exchange" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Crypto Trading Exchange</h3>
+            <p class="text-orange-300 text-sm md:text-base">Dark mode trading terminal</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 7.png" data-url="https://example.com/edtech">
+          <img src="Web/Web 7.png" alt="Education Platform" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Online Learning Academy</h3>
+            <p class="text-orange-300 text-sm md:text-base">Interactive course experience</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 8.png" data-url="https://example.com/fitness">
+          <img src="Web/Web 8.png" alt="Fitness App Landing" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Fitness Coaching App</h3>
+            <p class="text-orange-300 text-sm md:text-base">Motivational & conversion-focused</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 9.png" data-url="https://example.com/agency">
+          <img src="Web/Web 9.png" alt="Digital Agency Site" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Creative Agency Showcase</h3>
+            <p class="text-orange-300 text-sm md:text-base">Bold visuals & case studies</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 10.png" data-url="https://example.com/restaurant">
+          <img src="Web/Web 10.png" alt="Restaurant Website" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Premium Restaurant Site</h3>
+            <p class="text-orange-300 text-sm md:text-base">Menu & reservation experience</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 11.png" data-url="https://example.com/saas-marketing">
+          <img src="Web/Web 11.png" alt="SaaS Marketing Page" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">SaaS Marketing Landing</h3>
+            <p class="text-orange-300 text-sm md:text-base">High-conversion hero section</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 12.png" data-url="https://example.com/travel">
+          <img src="Web/Web 12.png" alt="Travel Booking Site" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Travel Experience Platform</h3>
+            <p class="text-orange-300 text-sm md:text-base">Inspirational destination explorer</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-full="Web/Web 13.png" data-url="https://example.com/portfolio-template">
+          <img src="Web/Web 13.png" alt="Creative Portfolio" loading="lazy" decoding="async"/>
+          <div class="overlay">
+            <h3 class="text-xl md:text-2xl font-bold mb-2">Personal Brand Portfolio</h3>
+            <p class="text-orange-300 text-sm md:text-base">Minimal & elegant showcase</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="mt-16 md:mt-20 text-center space-y-8">
+        <a href="contact.html" class="btn-flame text-white px-10 py-5 md:px-12 md:py-6 rounded-xl text-lg md:text-xl font-bold shadow-xl hover:shadow-orange-500/50 transition inline-block">
+          Ready to bring your vision to life? Contact us →
+        </a>
+        <div>
+          <a href="portfolio.html" class="back-btn inline-flex items-center text-base md:text-lg">
+            ← Back to Portfolio Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center">
+    <button id="close-btn" class="absolute top-5 right-5 md:top-8 md:right-8 text-white text-5xl md:text-6xl font-light hover:text-orange-400 transition z-60">×</button>
+    <div class="relative w-full max-w-6xl px-4">
+      <img id="lightbox-img" src="" alt="Project Preview" class="max-h-[85vh] max-w-full object-contain mx-auto rounded-xl shadow-2xl">
+      <a id="lightbox-link" href="#" target="_blank" class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2">
+        Visit Live Site →
+      </a>
+    </div>
+    <button id="prev-btn" class="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 text-white text-5xl md:text-6xl font-light hover:text-orange-400 transition">‹</button>
+    <button id="next-btn" class="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 text-white text-5xl md:text-6xl font-light hover:text-orange-400 transition">›</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-10 md:py-12 border-t border-orange-900/50">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-16 md:h-20 mx-auto mb-6 opacity-90"/>
+      <p class="text-orange-400 font-medium text-base md:text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-6 text-sm md:text-base">Web • Landing Pages • Graphics • Logos • Email Marketing</p>
+      <p class="text-xs md:text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Mobile Menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose = document.getElementById('mobile-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('overlay');
+
+    if (mobileToggle && mobileMenu && overlay) {
+      const openMobile = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeMobile = () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+      mobileToggle.addEventListener('click', openMobile);
+      mobileClose.addEventListener('click', closeMobile);
+      overlay.addEventListener('click', closeMobile);
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobile));
+    }
+
+    // More dropdown
+    const moreToggle = document.getElementById('more-toggle');
+    const moreDropdown = document.getElementById('more-dropdown');
+    const moreIcon = document.getElementById('more-icon');
+
+    if (moreToggle && moreDropdown) {
+      const toggleMore = (e) => {
+        e.stopPropagation();
+        moreDropdown.classList.toggle('hidden');
+        moreDropdown.classList.toggle('opacity-0');
+        moreDropdown.classList.toggle('scale-95');
+        moreIcon.classList.toggle('rotate-180');
+      };
+      const closeMore = (e) => {
+        if (!moreToggle.contains(e.target) && !moreDropdown.contains(e.target)) {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        }
+      };
+      moreToggle.addEventListener('click', toggleMore);
+      document.addEventListener('click', closeMore);
+      moreDropdown.querySelectorAll('a').forEach(() => moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95'));
+    }
+
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxLink = document.getElementById('lightbox-link');
+    const closeBtn = document.getElementById('close-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    let currentIndex = 0;
+    const items = [];
+
+    document.querySelectorAll('.portfolio-item').forEach((item, index) => {
+      items.push({
+        full: item.dataset.full || item.querySelector('img')?.src || '',
+        url: item.dataset.url || '#'
+      });
+
+      item.addEventListener('click', () => {
+        currentIndex = index;
+        updateLightbox();
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function updateLightbox() {
+      const project = items[currentIndex];
+      if (!project) return;
+
+      lightboxImg.src = project.full;
+
+      if (project.url && project.url !== '#' && project.url.trim() !== '') {
+        lightboxLink.href = project.url;
+        lightboxLink.style.display = 'block';
+      } else {
+        lightboxLink.style.display = 'none';
+      }
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      updateLightbox();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      updateLightbox();
+    });
+
+    // Swipe support
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    lightbox.addEventListener('touchend', e => {
+      const touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextBtn.click();
+      if (touchEndX - touchStartX > 50) prevBtn.click();
+    });
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Ruacheon – Spirited Solutions</title>
+  <meta name="description" content="Learn about Ruacheon – a passionate digital agency delivering bold web design, high-converting landing pages, creative graphics & logos, and results-driven email marketing."/>
+  <meta name="keywords" content="Ruacheon about, spirited solutions, digital agency, web design agency, email marketing agency"/>
+  <meta property="og:title" content="About Ruacheon – Spirited Solutions"/>
+  <meta property="og:description" content="We're a team ignited by creativity and results – helping brands grow through powerful digital experiences."/>
+  <meta property="og:image" content="ruacheon-logo.png"/>
+  <meta property="og:url" content="https://yourdomain.com/about.html"/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #e0e0e0; scroll-behavior: smooth; }
+    h1, h2, h3 { color: #ffffff; }
+    .flame-gradient { background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-flame { background: linear-gradient(to right, #ff4500, #ff8c00); }
+    .btn-flame:hover { background: linear-gradient(to right, #ff6347, #ffb347); }
+    nav a.active { color: #ff8c00 !important; font-weight: 700; border-bottom: 2px solid #ff4500; }
+
+    /* ── Video background styles ── */
+    #video-bg {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.60); /* adjust 0.60 → 0.70 if text needs more contrast */
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Semi-transparent dark overlay -->
+  <div class="video-overlay"></div>
+
+<!-- Header / Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo & Brand -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+        <div class="flex flex-col">
+          <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+          <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+        <!-- More Dropdown – click to toggle -->
+        <div class="relative">
+          <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+            More
+            <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+            <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+            <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+            <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+          Contact Us
+        </a>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== MOBILE MENU (added – required for your JS to work) ==================== -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+  <div class="p-6 flex flex-col h-full text-white">
+    <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+    
+    <nav class="flex flex-col gap-6 text-lg font-medium">
+      <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+      <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+      <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+      <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+      <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+      <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+      
+      <div class="border-t border-orange-900/40 my-4 pt-4">
+        <a href="team.html" class="hover:text-orange-400 transition block py-2">Team</a>
+        <a href="hire us.html" class="hover:text-orange-400 transition block py-2">Hire Us</a>
+        <a href="testimonial.html" class="hover:text-orange-400 transition block py-2">Testimonial</a>
+      </div>
+      
+      <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+        Contact Us
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- Mobile menu overlay (dark background when open) -->
+<div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+<!-- ==================== END MOBILE MENU ==================== -->
+
+<section class="py-28 md:py-40 text-center bg-gradient-to-b from-black via-gray-950 to-black">
+  <div class="container mx-auto px-6">
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 flame-gradient">About Ruacheon</h1>
+    <p class="text-3xl md:text-4xl font-semibold text-orange-400 mb-10">TIMELESS TECH</p>
+    <p class="text-lg md:text-2xl max-w-4xl mx-auto mb-14 text-gray-300 leading-relaxed">
+      We are a passionate digital agency ignited by creativity, strategy, and real results. Our mission is to empower brands with bold online presence that stands out and converts.
+    </p>
+  </div>
+</section>
+
+<section class="py-20">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto text-center md:text-left">
+      <h2 class="text-4xl md:text-7xl font-bold flame-gradient mb-10">Our Story</h2>
+      <p class="text-lg text-gray-300 leading-relaxed mb-8">
+        Ruacheon was born from a simple belief: every brand deserves a powerful, timeless digital voice. Founded with a spark of passion for innovation and growth, we combine cutting-edge web design, magnetic landing pages, striking graphics & logos, and high-impact email marketing to help businesses thrive in a crowded digital world.
+      </p>
+      <p class="text-lg text-gray-300 leading-relaxed mb-8">
+        Our name draws from the idea of "Ruach" (spirit/breath of life) and "Eon" (timeless energy) — reflecting our drive to infuse lasting vitality into every project we touch. We don't just build websites or send emails; we ignite transformations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-black/40">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 flame-gradient">What Drives Us</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7x5 mx-auto">
+      <div class="bg-gray-900/70 p-8 rounded-2xl border border-orange-900/40 text-center">
+        <div class="text-6xl mb-6 flame-gradient font-black">Creativity</div>
+        <p class="text-gray-300">We believe bold ideas deserve bold execution. Every design tells a story.</p>
+      </div>
+      <div class="bg-gray-900/70 p-8 rounded-2xl border border-orange-900/40 text-center">
+        <div class="text-6xl mb-6 flame-gradient font-black">Results</div>
+        <p class="text-gray-300">Beautiful is great — but beautiful that converts is our standard.</p>
+      </div>
+      <div class="bg-gray-900/70 p-8 rounded-2xl border border-orange-900/40 text-center">
+        <div class="text-6xl mb-6 flame-gradient font-black">Partnership</div>
+        <p class="text-gray-300">We grow when you grow. Your success is our fuel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold mb-12 flame-gradient">Ready to Work Together?</h2>
+    <a href="contact.html" class="btn-flame text-white px-12 py-6 rounded-xl text-xl font-bold shadow-2xl shadow-orange-700/30 hover:shadow-orange-600/50 transition inline-block">
+      Let's Ignite Your Vision
+    </a>
+  </div>
+</section>
+
+<footer class="bg-black text-white py-12 border-t border-orange-900/50">
+  <div class="container mx-auto px-6 text-center">
+    <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/>
+    <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+    <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing</p>
+    <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ────────────────────────────────────────────────
+  // Mobile hamburger menu
+  // ────────────────────────────────────────────────
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileClose  = document.getElementById('mobile-close');
+  const mobileMenu   = document.getElementById('mobile-menu');
+  const overlay      = document.getElementById('overlay');
+
+  if (mobileToggle && mobileMenu && overlay) {
+    const openMobile = () => {
+      mobileMenu.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    };
+
+    const closeMobile = () => {
+      mobileMenu.classList.add('translate-x-full');
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    overlay.addEventListener('click', closeMobile);
+
+    // Close mobile menu when any link inside is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobile);
+    });
+  }
+
+  // ────────────────────────────────────────────────
+  // Desktop "More" dropdown – single click toggle
+  // ────────────────────────────────────────────────
+  const moreToggle   = document.getElementById('more-toggle');
+  const moreDropdown = document.getElementById('more-dropdown');
+  const moreIcon     = document.getElementById('more-icon');
+
+  if (moreToggle && moreDropdown) {
+    const toggleMore = (event) => {
+      event.stopPropagation();
+      moreDropdown.classList.toggle('hidden');
+      moreDropdown.classList.toggle('opacity-0');
+      moreDropdown.classList.toggle('scale-95');
+      moreIcon.classList.toggle('rotate-180');
+    };
+
+    const closeMore = (event) => {
+      if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+        moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+        moreIcon.classList.remove('rotate-180');
+      }
+    };
+
+    moreToggle.addEventListener('click', toggleMore);
+    document.addEventListener('click', closeMore);
+
+    // Close dropdown when clicking any link inside it
+    moreDropdown.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+        moreIcon.classList.remove('rotate-180');
+      });
+    });
+  }
+
+  // Optional: log when script is ready (for debugging)
+  console.log('Header navigation script loaded – mobile menu should now work on all screens');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graphics & Logo Design | Ruacheon Portfolio</title>
+  <meta name="description" content="Bold graphics, logos, brand identities, social assets and illustrations by Ruacheon."/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+    .flame-gradient {
+      background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn-flame {
+      background: linear-gradient(to right, #ff4500, #ff8c00);
+    }
+    .btn-flame:hover {
+      background: linear-gradient(to right, #ff6347, #ffb347);
+    }
+    nav a.active {
+      color: #ff8c00 !important;
+      font-weight: 700;
+      border-bottom: 2px solid #ff4500;
+    }
+
+    #video-bg {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: -1;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 1200px;           /* wider container → cards appear bigger */
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    @media (min-width: 640px) { 
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; } 
+    }
+    @media (min-width: 1024px) { 
+      .portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } 
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.25rem;      /* kept the nice round border */
+      box-shadow: 0 10px 25px rgba(255,69,0,0.12);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      aspect-ratio: 1 / 1;         /* PERFECT SQUARE – all cards exactly equal size */
+      width: 100%;
+      background: #111;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px rgba(255,69,0,0.28);
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;         /* contain so logos/graphics aren't cropped */
+      padding: 1.5rem;             /* breathing room inside square */
+      transition: transform 0.6s ease;
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .portfolio-item:hover .overlay {
+      opacity: 1;
+    }
+
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox img {
+      max-width: 95%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 140, 0, 0.1);
+      color: #ff8c00;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 140, 0, 0.3);
+    }
+    .back-btn:hover {
+      background: rgba(255, 140, 0, 0.2);
+      transform: translateX(-4px);
+      box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Logo & Brand -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+            <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+          <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+          <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+          <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+          <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+          <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+          <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+          <!-- More Dropdown -->
+          <div class="relative">
+            <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+              More
+              <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+              <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+              <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+              <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+    <div class="p-6 flex flex-col h-full text-white">
+      <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+      
+      <nav class="flex flex-col gap-6 text-lg font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+        
+        <div class="border-t border-orange-900/40 my-4 pt-4">
+          <a href="team.html" class="hover:text-orange-400 transition block py-2">Team</a>
+          <a href="hire us.html" class="hover:text-orange-400 transition block py-2">Hire Us</a>
+          <a href="testimonial.html" class="hover:text-orange-400 transition block py-2">Testimonial</a>
+        </div>
+        
+        <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+          Contact Us
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+
+  <!-- Hero with Back Button -->
+  <section class="py-20 md:py-28 bg-gradient-to-b from-black via-gray-950 to-black">
+    <div class="container mx-auto px-6 text-center">
+      <a href="portfolio.html" class="back-btn mb-6 inline-flex items-center">
+        ← Back to Portfolio
+      </a>
+      <h1 class="text-5xl md:text-6xl font-extrabold flame-gradient mb-6">Graphics & Logo Design</h1>
+      <p class="text-xl md:text-2xl text-orange-300 mb-10">
+        Bold visuals, brand identities, social assets and illustrations
+      </p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="py-20">
+    <div class="container mx-auto px-6">
+      <div class="portfolio-grid">
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics2.jpg" 
+             data-title="Sleek Minimal Mark">
+          <img src="images/Graphics 2.jpg" alt="Sleek Minimal Mark"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Sleek Minimal Mark</h3>
+            <p class="text-orange-300">Refined simplicity with quiet confidence</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 3.jpg" 
+             data-title="Warm Retro Vibe">
+          <img src="images/Graphics 3.jpg" alt="Warm Retro Vibe"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Warm Retro Vibe</h3>
+            <p class="text-orange-300">Nostalgic tones and inviting texture</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 4.jpg" 
+             data-title="Sharp Geometric Edge">
+          <img src="images/Graphics 4.jpg" alt="Sharp Geometric Edge"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Sharp Geometric Edge</h3>
+            <p class="text-orange-300">Precision lines and modern tension</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 5.jpg" 
+             data-title="Elegant Serif Flow">
+          <img src="images/Graphics 5.jpg" alt="Elegant Serif Flow"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Elegant Serif Flow</h3>
+            <p class="text-orange-300">Graceful curves with timeless poise</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 6.jpg" 
+             data-title="Raw Urban Grit">
+          <img src="images/Graphics 6.jpg" alt="Raw Urban Grit"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Raw Urban Grit</h3>
+            <p class="text-orange-300">Bold attitude and street-level energy</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 7.jpg" 
+             data-title="Electric Night Pulse">
+          <img src="images/Graphics 7.jpg" alt="Electric Night Pulse"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Electric Night Pulse</h3>
+            <p class="text-orange-300">Vibrant glow and nocturnal rhythm</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 8.jpg" 
+             data-title="Organic Handcrafted Touch">
+          <img src="images/Graphics 8.jpg" alt="Organic Handcrafted Touch"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Organic Handcrafted Touch</h3>
+            <p class="text-orange-300">Warm imperfection and soulful detail</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 9.jpg" 
+             data-title="Fluid Abstract Motion">
+          <img src="images/Graphics 9.jpg" alt="Fluid Abstract Motion"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Fluid Abstract Motion</h3>
+            <p class="text-orange-300">Dynamic flow and emotional depth</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 10.png" 
+             data-title="Crisp Professional Line">
+          <img src="images/Graphics 10.png" alt="Crisp Professional Line"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Crisp Professional Line</h3>
+            <p class="text-orange-300">Clean authority with quiet strength</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 11.jpg" 
+             data-title="Fierce Competitive Spirit">
+          <img src="images/Graphics 11.jpg" alt="Fierce Competitive Spirit"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Fierce Competitive Spirit</h3>
+            <p class="text-orange-300">Intense energy and bold presence</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 12.jpg" 
+             data-title="Gentle Natural Harmony">
+          <img src="images/Graphics 12.jpg" alt="Gentle Natural Harmony"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Gentle Natural Harmony</h3>
+            <p class="text-orange-300">Calm balance and earthy warmth</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 13.jpg" 
+             data-title="Retro Wave Nostalgia">
+          <img src="images/Graphics 13.jpg" alt="Retro Wave Nostalgia"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Retro Wave Nostalgia</h3>
+            <p class="text-orange-300">Vintage glow with future echoes</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 14.jpg" 
+             data-title="Refined Ornamental Grace">
+          <img src="images/Graphics 14.jpg" alt="Refined Ornamental Grace"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Refined Ornamental Grace</h3>
+            <p class="text-orange-300">Delicate detail with regal poise</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 15.jpg" 
+             data-title="Playful Character Energy">
+          <img src="images/Graphics 15.jpg" alt="Playful Character Energy"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Playful Character Energy</h3>
+            <p class="text-orange-300">Fun personality with welcoming charm</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 16.jpg" 
+             data-title="Clever Hidden Depth">
+          <img src="images/Graphics 16.jpg" alt="Clever Hidden Depth"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Clever Hidden Depth</h3>
+            <p class="text-orange-300">Smart layers and subtle surprise</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 17.jpg" 
+             data-title="Distorted Digital Edge">
+          <img src="images/Graphics 17.jpg" alt="Distorted Digital Edge"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Distorted Digital Edge</h3>
+            <p class="text-orange-300">Glitch tension and futuristic bite</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 18.jpg" 
+             data-title="Rhythmic Sound Visual">
+          <img src="images/Graphics 18.jpg" alt="Rhythmic Sound Visual"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Rhythmic Sound Visual</h3>
+            <p class="text-orange-300">Pulsing motion and audio emotion</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 19.jpg" 
+             data-title="Powerful Drive Symbol">
+          <img src="images/Graphics 19.jpg" alt="Powerful Drive Symbol"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Powerful Drive Symbol</h3>
+            <p class="text-orange-300">Intense motivation and forward force</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 20.jpg" 
+             data-title="Rustic Crafted Seal">
+          <img src="images/Graphics 20.jpg" alt="Rustic Crafted Seal"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Rustic Crafted Seal</h3>
+            <p class="text-orange-300">Handmade warmth and authentic texture</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 21.jpg" 
+             data-title="Wanderlust Horizon">
+          <img src="images/Graphics 21.jpg" alt="Wanderlust Horizon"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Wanderlust Horizon</h3>
+            <p class="text-orange-300">Endless journey and open adventure</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 22.jpg" 
+             data-title="Vibrant Festival Burst">
+          <img src="images/Graphics 22.jpg" alt="Vibrant Festival Burst"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Vibrant Festival Burst</h3>
+            <p class="text-orange-300">Explosive color and collective joy</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 23.jpg" 
+             data-title="Intelligent Connection Node">
+          <img src="images/Graphics 23.jpg" alt="Intelligent Connection Node"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Intelligent Connection Node</h3>
+            <p class="text-orange-300">Smart networks and bright insight</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 24.jpg" 
+             data-title="Joyful Companion Mark">
+          <img src="images/Graphics 24.jpg" alt="Joyful Companion Mark"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Joyful Companion Mark</h3>
+            <p class="text-orange-300">Warm loyalty and playful spirit</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 25.jpg" 
+             data-title="Timeless Precision Crest">
+          <img src="images/Graphics 25.jpg" alt="Timeless Precision Crest"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Timeless Precision Crest</h3>
+            <p class="text-orange-300">Masterful detail and enduring class</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 26.jpg" 
+             data-title="Rebel Street Pulse">
+          <img src="images/Graphics 26.jpg" alt="Rebel Street Pulse"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Rebel Street Pulse</h3>
+            <p class="text-orange-300">Defiant rhythm and authentic edge</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 27.jpg" 
+             data-title="Serene Herbal Balance">
+          <img src="images/Graphics 27.jpg" alt="Serene Herbal Balance"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Serene Herbal Balance</h3>
+            <p class="text-orange-300">Calm restoration and gentle strength</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 28.jpg" 
+             data-title="Neon Battle Shield">
+          <img src="images/Graphics 28.jpg" alt="Neon Battle Shield"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Neon Battle Shield</h3>
+            <p class="text-orange-300">Glowing intensity and fierce defense</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 29.jpg" 
+             data-title="Roasted Craft Warmth">
+          <img src="images/Graphics 29.jpg" alt="Roasted Craft Warmth"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Roasted Craft Warmth</h3>
+            <p class="text-orange-300">Rich aroma and inviting depth</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 30.jpg" 
+             data-title="Sonic Wave Motion">
+          <img src="images/Graphics 30.jpg" alt="Sonic Wave Motion"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Sonic Wave Motion</h3>
+            <p class="text-orange-300">Rhythmic flow and vibrant frequency</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 32.jpg" 
+             data-title="Sonic Wave Motion">
+          <img src="images/Graphics 32.jpg" alt="Sonic Wave Motion"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">cool design</h3>
+            <p class="text-orange-300">Vibrant frequency</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" 
+             data-full="images/Graphics 33.jpg" 
+             data-title="Sonic Wave Motion">
+          <img src="images/Graphics 33.jpg" alt="Sonic Wave Motion"/>
+          <div class="overlay">
+            <h3 class="text-2xl font-bold mb-2">Adorable design</h3>
+            <p class="text-orange-300">Rhythmic and vibrant</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom CTA + Back Button -->
+      <div class="mt-20 text-center space-y-8">
+        <a href="contact.html" class="btn-flame text-white px-12 py-6 rounded-xl text-xl font-bold shadow-xl hover:shadow-orange-500/50 transition inline-block">
+          Ready to bring your vision to life? Contact us →
+        </a>
+        <div>
+          <a href="portfolio.html" class="back-btn inline-flex items-center text-lg">
+            ← Back to Portfolio Overview
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-screen Lightbox (no project button) -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center">
+    <button id="close-btn" class="absolute top-6 right-6 text-white text-5xl font-light hover:text-orange-400 transition z-60">×</button>
+    <div class="relative w-full max-w-6xl px-4">
+      <img id="lightbox-img" src="" alt="Full View" class="max-h-[85vh] max-w-full object-contain mx-auto rounded-lg shadow-2xl">
+    </div>
+    <button id="prev-btn" class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-white text-6xl font-light hover:text-orange-400 transition">‹</button>
+    <button id="next-btn" class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-white text-6xl font-light hover:text-orange-400 transition">›</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12 border-t border-orange-900/50">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/>
+      <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing</p>
+      <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Mobile Menu
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose  = document.getElementById('mobile-close');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const overlay      = document.getElementById('overlay');
+
+    if (mobileToggle && mobileMenu && overlay) {
+      const openMobile = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeMobile = () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+
+      mobileToggle.addEventListener('click', openMobile);
+      mobileClose.addEventListener('click', closeMobile);
+      overlay.addEventListener('click', closeMobile);
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobile);
+      });
+    }
+
+    // Desktop "More" dropdown
+    const moreToggle   = document.getElementById('more-toggle');
+    const moreDropdown = document.getElementById('more-dropdown');
+    const moreIcon     = document.getElementById('more-icon');
+
+    if (moreToggle && moreDropdown) {
+      const toggleMore = (event) => {
+        event.stopPropagation();
+        moreDropdown.classList.toggle('hidden');
+        moreDropdown.classList.toggle('opacity-0');
+        moreDropdown.classList.toggle('scale-95');
+        moreIcon.classList.toggle('rotate-180');
+      };
+
+      const closeMore = (event) => {
+        if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        }
+      };
+
+      moreToggle.addEventListener('click', toggleMore);
+      document.addEventListener('click', closeMore);
+
+      moreDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        });
+      });
+    }
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    let currentIndex = 0;
+    const items = [];
+
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    portfolioItems.forEach((item, index) => {
+      items.push({
+        full: item.dataset.full || item.querySelector('img').src,
+        title: item.dataset.title || 'Design'
+      });
+
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentIndex = index;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      const current = items[currentIndex];
+      lightboxImg.src = current.full;
+      lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      openLightbox();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % items.length;
+      openLightbox();
+    });
+
+    // Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextBtn.click();     // left
+      if (touchEndX - touchStartX > 50) prevBtn.click();     // right
+    });
+
+    console.log('Graphics & Logo Design portfolio ready – mobile menu & swipe lightbox working, no project button');
+  });
+  </script>
+</body>
+</html>

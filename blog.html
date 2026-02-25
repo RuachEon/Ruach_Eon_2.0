@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog | Ruacheon – Spirited Digital Insights</title>
+  <meta name="description" content="Daily insights from Ruacheon on web design, landing pages, graphics, logos, email marketing, branding, and SEO/AEO."/>
+  <meta name="keywords" content="Ruacheon blog, web design tips, landing page strategies, graphics design, logo design, email marketing, branding, SEO AEO"/>
+  <link rel="icon" href="Ruach favicon.png" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #e0e0e0; scroll-behavior: smooth; }
+    h1, h2, h3 { color: #ffffff; }
+    .flame-gradient { background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-flame { background: linear-gradient(to right, #ff4500, #ff8c00); }
+    .btn-flame:hover { background: linear-gradient(to right, #ff6347, #ffb347); }
+    nav a.active { color: #ff8c00 !important; font-weight: 700; border-bottom: 2px solid #ff4500; }
+
+    /* Video background */
+    #video-bg {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.60);
+      z-index: -1;
+    }
+
+    .blog-card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(255,69,0,0.2);
+      border-color: #ff8c00;
+    }
+
+    /* Modal */
+    #blog-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 50;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+      padding: 2rem 0;
+    }
+    #blog-modal-content {
+      background: #1a1a1a;
+      width: 90%;
+      max-width: 1000px;
+      margin: 1rem auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      position: relative;
+    }
+    #blog-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+    }
+    #blog-close:hover { color: #ff8c00; }
+
+    .modal-image {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 0.75rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .share-buttons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+    .share-buttons a:hover { transform: scale(1.15); }
+
+    .comments-placeholder {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #444;
+      text-align: center;
+      color: #aaa;
+    }
+
+    @media (max-width: 640px) {
+      #blog-modal-content { padding: 1.5rem; }
+      h2 { font-size: 1.75rem; }
+      .modal-image { max-height: 50vh; }
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Logo & Brand -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+          <div class="flex flex-col">
+            <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+            <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+          <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+          <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+          <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+          <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+          <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+          <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+          <!-- More Dropdown – click to toggle -->
+          <div class="relative">
+            <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+              More
+              <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+              <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+              <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+              <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+            Contact Us
+          </a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MOBILE MENU (added – required for your JS to work) ==================== -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+    <div class="p-6 flex flex-col h-full text-white">
+      <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+      
+      <nav class="flex flex-col gap-6 text-lg font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+        
+        <div class="border-t border-orange-900/40 my-4 pt-4">
+          <a href="team.html" class="hover:text-orange-400 transition block py-2">Team</a>
+          <a href="hire us.html" class="hover:text-orange-400 transition block py-2">Hire Us</a>
+          <a href="testimonial.html" class="hover:text-orange-400 transition block py-2">Testimonial</a>
+        </div>
+        
+        <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+          Contact Us
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay (dark background when open) -->
+  <div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+  <!-- ==================== END MOBILE MENU ==================== -->
+
+  <main class="relative z-10 pt-8 pb-20">
+    <div class="container mx-auto px-6">
+      <p class="text-xl text-center text-gray-300 mb-12 max-w-3xl mx-auto">
+        Daily insights to help you grow — one topic at a time.
+      </p>
+
+      <!-- Today's Featured Post -->
+      <div class="max-w-4xl mx-auto mb-20">
+        <h2 class="text-3xl font-bold flame-gradient mb-8 text-center">Today's Insight</h2>
+        <div id="daily-post" class="blog-card"></div>
+      </div>
+
+      <!-- Recent Posts -->
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold flame-gradient mb-10 text-center">Recent Posts</h2>
+        <div id="recent-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div class="text-center mt-12">
+          <button id="load-more" class="btn-flame text-white px-10 py-5 rounded-xl text-xl font-bold hover:shadow-xl transition">
+            Load More
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for full post -->
+  <div id="blog-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-start justify-content-center overflow-y-auto pt-8">
+    <div id="blog-modal-content" class="w-full max-w-4xl mx-4 p-6 md:p-10 rounded-xl bg-[#1a1a1a] shadow-2xl relative">
+      <button id="blog-close" class="absolute top-4 right-6 text-5xl font-light hover:text-orange-400 transition">×</button>
+      <!-- Full content goes here -->
+    </div>
+  </div>
+
+  <footer class="bg-black text-white py-12 border-t border-orange-900/50 relative z-10">
+    <div class="container mx-auto px-6 text-center">
+      <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/>
+      <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+      <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing</p>
+      <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Topics cycle
+    const topics = [
+      { name: "Web Design", color: "from-blue-600 to-indigo-700", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200" },
+      { name: "Landing Pages", color: "from-purple-600 to-pink-600", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200" },
+      { name: "Graphics Design", color: "from-teal-500 to-cyan-600", img: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200" },
+      { name: "Logo Design", color: "from-amber-500 to-orange-600", img: "https://images.unsplash.com/photo-1626785774573-4b7b30bb2b6d?w=1200" },
+      { name: "Email Marketing", color: "from-red-500 to-rose-600", img: "https://images.unsplash.com/photo-1556155099-490a1ba16284?w=1200" },
+      { name: "Branding", color: "from-emerald-500 to-green-600", img: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1200" },
+      { name: "SEO / AEO", color: "from-cyan-500 to-blue-600", img: "https://images.unsplash.com/photo-1432889490240-84df33d47091?w=1200" }
+    ];
+
+    // Detailed articles
+    const articles = [
+      {
+        title: "The Future of Web Design: Trends Shaping 2026",
+        short: "Responsive design evolves with AI personalization, micro-interactions, accessibility-first principles, and sustainable practices...",
+        full: `Web design in 2026 is no longer just about aesthetics — it's about intelligent, adaptive experiences that prioritize users and performance. AI now powers dynamic layouts that change based on behavior, device, and context in real time.\n\nKey trends driving the industry:\n\n1. AI-Driven Personalization\nSites adapt colors, content order, and CTAs instantly. Example: Netflix-style recommendations for product pages.\n\n2. Voice & Gesture Interfaces\nTouchless navigation is becoming standard on mobile and smart devices.\n\n3. Sustainable & Ethical Design\nLow-energy animations, dark mode defaults, and green hosting reduce carbon footprint.\n\n4. 3D & Immersive Web Experiences\nWebGL-powered interactive heroes and AR previews engage users longer.\n\n5. Inclusive & Accessible-First Design\nBuilt-in ARIA roles, high contrast modes, keyboard navigation, and screen reader optimization from day one.\n\nBest practices for implementation:\n- Start with mobile-first approach\n- Use CSS variables and custom properties for easy theming\n- Test across real devices and browsers\n- Prioritize Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1)\n\nTools to use: Figma for prototyping, Tailwind CSS for rapid styling, Vercel for edge deployment.\n\nThe future belongs to designers who blend creativity with data-driven decisions and ethical considerations.`
+      },
+      {
+        title: "Landing Page Mastery: Conversion Secrets for 2026",
+        short: "One goal, zero distractions — the new rules for high-converting landing pages in the age of short attention spans...",
+        full: `Landing pages remain the #1 tool for lead generation, sales, and sign-ups. In 2026, success comes from speed, trust, and hyper-relevance.\n\nCore conversion principles:\n\n- Strong Hero Section\nBenefit-first headline + subheadline + short looping video or Lottie animation.\n\n- Social Proof Above the Fold\nReal testimonials, client logos, case study snippets, trust badges.\n\n- Single, High-Contrast CTA\nUrgency copy ("Claim Now – Limited Spots") + contrasting color.\n\n- Progressive Forms\nAsk for name/email first, more details later via multi-step or conditional logic.\n\n- AI-Powered Optimization\nAutomatic A/B testing for headlines, images, copy via tools like Unbounce or Optimizely.\n\nProven tactics:\n- Remove navigation bar completely\n- Add exit-intent popups with discount\n- Use countdown timers for limited offers\n- Include video testimonials or explainer clips\n\nCase study: A SaaS client increased sign-ups 47% by simplifying copy and adding social proof. Always test mobile speed (<3s load time) and track heatmaps/scroll depth.\n\nFocus on clarity, value, and urgency — the winning formula in 2026.`
+      },
+      {
+        title: "Graphics Design Trends Dominating 2026",
+        short: "Bold gradients, AI textures, human imperfection, and maximalism — what's hot in visual design right now...",
+        full: `Graphics design in 2026 is embracing personality, emotion, and technology. Trends reflect a desire for authenticity in a heavily AI-generated world.\n\nTop trends for 2026:\n\n- Retro-Futurism\n80s/90s synthwave aesthetics meet modern chrome and neon gradients.\n\n- AI-Enhanced Organic Textures\nProcedural patterns with hand-drawn imperfections for warmth.\n\n- Maximalism & Layered Chaos\nRich, busy compositions with overlapping elements, textures, and typography.\n\n- Inclusive & Diverse Illustration\nRepresentation of real people, cultures, and body types.\n\n- Motion & Interactive Graphics\nShort loops for social media, web heroes, and AR filters.\n\nPractical tips:\n- Combine Midjourney/Stable Diffusion for concepts + Photoshop for refinement\n- Use Figma for collaborative workflows\n- Export in SVG for scalability, WebP for fast web loading\n- Ensure accessibility: high contrast, alt text, no flashing animations\n\nThe winning approach: blend AI speed with human emotion and storytelling.`
+      },
+      {
+        title: "Logo Design Principles That Still Work in 2026",
+        short: "Simplicity, scalability, and storytelling — timeless rules for modern logos that stand out...",
+        full: `Logo design is the cornerstone of brand recognition. In 2026, effective logos balance timeless principles with digital adaptability.\n\nCore principles:\n\n- Simplicity & Memorability\nFewer elements = stronger recall (think Nike, Apple)\n\n- Versatility & Scalability\nWorks in black/white, favicon size, motion, merchandise\n\n- Meaningful Symbolism\nSubtle storytelling without being overly literal\n\n- Adaptability\nFunctions as wordmark, icon, monogram, animated version\n\n- Emotional Resonance\nEvokes the right feeling (trust, energy, luxury)\n\nModern process:\n1. Research brand values, competitors, audience\n2. Sketch 50+ concepts by hand\n3. Digitize in Illustrator/Figma\n4. Test in multiple contexts (app icon, billboard, dark mode)\n5. Refine with feedback\n\nAvoid common mistakes: trendy effects, too many colors, poor negative space. Focus on longevity — a good logo lasts decades.`
+      },
+      {
+        title: "Email Marketing Strategies That Win in 2026",
+        short: "Personalization at scale, interactive emails, privacy-first automation, and deliverability focus...",
+        full: `Email marketing delivers the highest ROI of any digital channel in 2026. Success requires relevance, interactivity, and trust.\n\nWinning strategies:\n\n- Hyper-Personalization\nAI segments by behavior, location, past purchases — dynamic content blocks\n\n- Interactive Emails\nAMP technology: polls, carousels, product recommendations, in-email checkout\n\n- Zero-Party Data\nPreference centers, quizzes, style finders — users willingly share info\n\n- Smart Automation Flows\nWelcome series, abandoned cart, win-back, post-purchase upsell\n\n- Deliverability Mastery\nIP warm-up, DKIM/SPF/DMARC, clean lists, avoid spam triggers\n\nMetrics to watch:\n- Open rate >30%\n- Click-through >5%\n- Conversion rate >2%\n\nBest practice: A/B test everything (subject lines, send time, images), comply with GDPR/CAN-SPAM, and always offer clear unsubscribe. Personalization + interactivity = loyalty.`
+      },
+      {
+        title: "Branding in the AI Era: Strategies for 2026",
+        short: "Authenticity, consistency, emotional connection — building brands that last in an automated world...",
+        full: `Branding in 2026 is about standing out in a sea of AI-generated content. Authenticity and human connection are the differentiators.\n\nKey strategies:\n\n- Human-First Storytelling\nReal stories, behind-the-scenes, founder voices — AI can't replicate emotion\n\n- Multi-Sensory Identity\nVisuals + sound (voiceovers, jingles), motion, AR filters, tactile packaging\n\n- Community Co-Creation\nUser-generated content, fan art, collaborative campaigns\n\n- Purpose-Driven Positioning\nSustainability, ethics, social impact — consumers demand values alignment\n\n- Adaptive Brand Systems\nFlexible guidelines for digital, physical, voice, metaverse\n\nFramework to build:\n1. Define core values & mission\n2. Create visual (logo, colors, typography) + verbal (tone, messaging) system\n3. Apply consistently across all touchpoints\n4. Measure sentiment & evolve with audience\n\nA strong brand turns customers into advocates and increases lifetime value dramatically.`
+      },
+      {
+        title: "SEO & AEO Trends to Master in 2026",
+        short: "From keyword stuffing to answer-first content — the new rules of visibility in AI search...",
+        full: `Search in 2026 is dominated by AI overviews and direct answers. Traditional SEO is evolving into AEO (Answer Engine Optimization).\n\nKey shifts:\n\n- AEO Priority\nWrite content that directly answers questions in clear, structured format for AI summaries\n\n- Zero-Click Dominance\nOptimize for featured snippets, AI overviews, voice search results\n\n- E-E-A-T Emphasis\nExperience, Expertise, Authoritativeness, Trustworthiness — show real credentials\n\n- Voice & Visual Search\nOptimize alt text, schema for images, natural language answers\n\n- Technical Foundations\nCore Web Vitals (LCP <2.5s, FID <100ms, CLS <0.1), mobile-first, HTTPS\n\nActionable steps:\n- Use schema markup (FAQ, HowTo, Article)\n- Create comprehensive topic clusters\n- Answer user intent in first paragraph\n- Monitor AI visibility tools\n- Build backlinks from authoritative sites\n\nThe future favors helpful, original, authoritative content over keyword tricks.`
+      }
+    ];
+
+    // Date & cycle logic
+    const today = new Date();
+    const start = new Date('2025-01-01');
+    const diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+    const index = diffDays % topics.length;
+    const topic = topics[index];
+    const post = articles[index];
+    const dateStr = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Render today's post
+    document.getElementById('daily-post').innerHTML = `
+      <div class="p-6 md:p-10 blog-card" onclick="openFullPost(${index}, '${dateStr}')">
+        <img src="${topic.img}" alt="${topic.name}" class="w-full rounded-xl shadow-2xl mb-8 object-cover h-48 md:h-72">
+        <span class="inline-block px-4 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${topic.color} text-white mb-6">
+          ${dateStr} • ${topic.name}
+        </span>
+        <div class="flex items-center text-sm text-gray-400 mb-4">
+          <span>By Ruacheon Team</span>
+          <span class="mx-2">•</span>
+          <span>${dateStr}</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold flame-gradient mb-6">${post.title}</h2>
+        <p class="text-lg text-gray-300 leading-relaxed mb-8">${post.short}</p>
+        <span class="text-orange-400 font-medium hover:underline">Read Full Article →</span>
+      </div>
+    `;
+
+    // Recent posts (initial 7, load more up to 28)
+    let displayedDays = 7;
+    const maxDays = 28;
+
+    function renderPosts() {
+      const container = document.getElementById('recent-posts');
+      container.innerHTML = '';
+
+      for (let i = 0; i < displayedDays; i++) {
+        const pastDate = new Date(today);
+        pastDate.setDate(today.getDate() - i);
+        const pastDiff = Math.floor((pastDate - start) / (1000 * 60 * 60 * 24));
+        const pastIndex = pastDiff % topics.length;
+        const pastTopic = topics[pastIndex];
+        const pastPost = articles[pastIndex];
+        const pastDateStr = pastDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        const card = document.createElement('div');
+        card.className = 'blog-card p-6';
+        card.innerHTML = `
+          <img src="${pastTopic.img}" alt="${pastTopic.name}" class="w-full rounded-xl mb-6 object-cover h-40">
+          <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${pastTopic.color} text-white mb-4">
+            ${pastDateStr} • ${pastTopic.name}
+          </span>
+          <div class="flex items-center text-xs text-gray-400 mb-3">
+            <span>By Ruacheon Team</span>
+            <span class="mx-2">•</span>
+            <span>${pastDateStr}</span>
+          </div>
+          <h3 class="text-xl font-bold flame-gradient mb-4">${pastPost.title}</h3>
+          <p class="text-gray-400 text-sm mb-6 line-clamp-3">${pastPost.short}</p>
+          <span class="text-orange-400 text-sm hover:underline cursor-pointer" onclick="openFullPost(${pastIndex}, '${pastDateStr}')">Read More →</span>
+        `;
+        card.onclick = () => openFullPost(pastIndex, pastDateStr);
+        container.appendChild(card);
+      }
+
+      document.getElementById('load-more').style.display = displayedDays < maxDays ? 'inline-block' : 'none';
+    }
+
+    renderPosts();
+
+    document.getElementById('load-more').addEventListener('click', () => {
+      displayedDays += 7;
+      if (displayedDays > maxDays) displayedDays = maxDays;
+      renderPosts();
+    });
+
+    // Open full post
+    function openFullPost(idx, date) {
+      const post = articles[idx];
+      const topic = topics[idx % topics.length];
+      const pageUrl = window.location.href;
+
+      document.getElementById('blog-modal-content').innerHTML = `
+        <button id="blog-close" class="absolute top-4 right-6 text-5xl font-light hover:text-orange-400 transition">×</button>
+        <img src="${topic.img}" alt="${topic.name}" class="modal-image">
+        <span class="inline-block px-4 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${topic.color} text-white mb-6">
+          ${date} • ${topic.name}
+        </span>
+        <div class="flex items-center text-sm text-gray-400 mb-6">
+          <span>By Ruacheon Team</span>
+          <span class="mx-2">•</span>
+          <span>${date}</span>
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold flame-gradient mb-8">${post.title}</h2>
+        <div class="text-lg md:text-xl text-gray-200 leading-relaxed whitespace-pre-line mb-12">
+          ${post.full}
+        </div>
+
+        <!-- Share Buttons -->
+        <div class="share-buttons flex justify-center mb-10">
+          <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(pageUrl)}" target="_blank" class="bg-[#1DA1F2] hover:bg-[#0d95e8]">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(post.title)}" target="_blank" class="bg-[#0A66C2] hover:bg-[#084d9e]">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}" target="_blank" class="bg-[#1877F2] hover:bg-[#166fe5]">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" class="bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743] hover:opacity-90">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/upload?text=${encodeURIComponent(post.title)}" target="_blank" class="bg-black hover:bg-gray-900">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.53.02C13.84.02 15.14 0 16.44 0c.08 1.53-.63 3.07-1.9 4.22-.66.66-1.5 1.07-2.44 1.22v5.93c-1.09.02-2.18-.17-3.21-.64v3.94c0 3.83 2.92 6.99 6.75 7.23 4.11.27 7.58-2.92 7.58-6.98 0-3.83-2.92-6.99-6.75-7.23v3.94c.66.02 1.32.22 1.9.66.58.44 1.02 1.07 1.27 1.82.25.75.3 1.56.14 2.34-.16.78-.58 1.5-1.2 2.02-.62.52-1.42.82-2.24.82-1.83 0-3.33-1.5-3.33-3.33v-9.33c.92-.02 1.84.22 2.65.72.81.5 1.44 1.22 1.84 2.06.4.84.58 1.78.52 2.71v-.02z"/></svg>
+          </a>
+        </div>
+
+        <!-- Comments Placeholder -->
+        <div class="mt-12 pt-8 border-t border-gray-700 comments-placeholder">
+          <h3 class="text-2xl font-bold mb-6">Comments</h3>
+          <p class="text-gray-400 py-8">Comments are coming soon — we'd love to hear your thoughts! Stay tuned for full integration.</p>
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-12 text-center">
+          <button onclick="closeModal()" class="btn-flame text-white px-10 py-5 rounded-xl text-xl font-bold hover:shadow-xl transition">
+            Back to Blog
+          </button>
+        </div>
+      `;
+
+      document.getElementById('blog-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      document.getElementById('blog-close').onclick = closeModal;
+      document.getElementById('blog-modal').onclick = (e) => {
+        if (e.target === document.getElementById('blog-modal')) closeModal();
+      };
+    }
+
+    function closeModal() {
+      document.getElementById('blog-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // ────────────────────────────────────────────────
+    // Mobile hamburger menu
+    // ────────────────────────────────────────────────
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileClose  = document.getElementById('mobile-close');
+    const mobileMenu   = document.getElementById('mobile-menu');
+    const overlay      = document.getElementById('overlay');
+
+    if (mobileToggle && mobileMenu && overlay) {
+      const openMobile = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+      };
+
+      const closeMobile = () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      };
+
+      mobileToggle.addEventListener('click', openMobile);
+      mobileClose.addEventListener('click', closeMobile);
+      overlay.addEventListener('click', closeMobile);
+
+      // Close mobile menu when any link inside is clicked
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobile);
+      });
+    }
+
+    // ────────────────────────────────────────────────
+    // Desktop "More" dropdown – single click toggle
+    // ────────────────────────────────────────────────
+    const moreToggle   = document.getElementById('more-toggle');
+    const moreDropdown = document.getElementById('more-dropdown');
+    const moreIcon     = document.getElementById('more-icon');
+
+    if (moreToggle && moreDropdown) {
+      const toggleMore = (event) => {
+        event.stopPropagation();
+        moreDropdown.classList.toggle('hidden');
+        moreDropdown.classList.toggle('opacity-0');
+        moreDropdown.classList.toggle('scale-95');
+        moreIcon.classList.toggle('rotate-180');
+      };
+
+      const closeMore = (event) => {
+        if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        }
+      };
+
+      moreToggle.addEventListener('click', toggleMore);
+      document.addEventListener('click', closeMore);
+
+      // Close dropdown when clicking any link inside it
+      moreDropdown.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          moreIcon.classList.remove('rotate-180');
+        });
+      });
+    }
+
+    // Optional: log when script is ready (for debugging)
+    console.log('Header navigation script loaded – mobile menu should now work on all screens');
+  });
+  </script>
+
+</body>
+</html>

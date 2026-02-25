@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services | Ruacheon – Spirited Web Design • Landing Pages • Graphics • Email Marketing</title>
+  <meta name="description" content="Discover Ruacheon's full range of spirited digital services: custom web design, high-converting landing pages, professional graphics & logos, powerful email marketing, professional video editing."/>
+  <meta name="keywords" content="Ruacheon services, web design, landing pages, logo design, graphics, email marketing, video editing, digital agency"/>
+  <meta property="og:title" content="Services – Ruacheon"/>
+  <meta property="og:description" content="Bold, results-driven digital services to ignite your business growth — now including professional video editing."/>
+  <meta property="og:image" content="ruacheon-logo.png"/>
+  <link rel="icon" href="ruacheon-favicon.ico" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #e0e0e0; scroll-behavior: smooth; }
+    h1, h2, h3 { color: #ffffff; }
+    .flame-gradient { background: linear-gradient(135deg, #ff4500, #ffa500, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-flame { background: linear-gradient(to right, #ff4500, #ff8c00); }
+    .btn-flame:hover { background: linear-gradient(to right, #ff6347, #ffb347); }
+    nav a.active { color: #ff8c00 !important; font-weight: 700; border-bottom: 2px solid #ff4500; }
+
+    /* ── Video background styles ── */
+    #video-bg {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.60);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative">
+
+  <!-- Video Background -->
+  <video id="video-bg" autoplay loop muted playsinline poster="Ruach favicon.png">
+    <source src="videos/bg-spirited-loop.webm" type="video/webm" />
+    <source src="videos/bg-spirited-loop.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Semi-transparent dark overlay -->
+  <div class="video-overlay"></div>
+
+<!-- Header / Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-orange-900/30 shadow-lg transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo & Brand -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="Ruach favicon.png" alt="Ruacheon" class="h-10 sm:h-12 lg:h-14 w-auto transition-transform duration-300 group-hover:scale-110" />
+        <div class="flex flex-col">
+          <span class="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">RUACHEON</span>
+          <span class="text-xs sm:text-sm text-orange-400/90 font-medium tracking-wider uppercase">Timeless Tech</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-9 text-white font-medium">
+        <a href="index.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Home</a>
+        <a href="services.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Services</a>
+        <a href="portfolio.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Portfolio</a>
+        <a href="pricing.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Pricing</a>
+        <a href="about.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">About</a>
+        <a href="blog.html" class="hover:text-orange-400 transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all hover:after:w-full">Blog</a>
+
+        <!-- More Dropdown – click to toggle -->
+        <div class="relative">
+          <button id="more-toggle" class="flex items-center gap-1.5 hover:text-orange-400 transition-colors duration-200 focus:outline-none">
+            More
+            <svg id="more-icon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="more-dropdown" class="absolute right-0 mt-1 w-56 bg-black/90 backdrop-blur-lg border border-orange-900/40 rounded-xl shadow-2xl py-2 hidden opacity-0 scale-95 transition-all duration-200">
+            <a href="team.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Team</a>
+            <a href="hire us.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Hire Us</a>
+            <a href="testimonial.html" class="block px-5 py-3 hover:bg-orange-900/30 hover:text-orange-300 transition-colors">Testimonial</a>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="contact.html" class="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 text-white font-semibold rounded-full shadow-lg shadow-orange-600/30 hover:shadow-orange-600/50 hover:scale-105 transition-all duration-300">
+          Contact Us
+        </a>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-toggle" class="lg:hidden text-white focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-black/95 backdrop-blur-xl translate-x-full transition-transform duration-300 z-[9999] lg:hidden overflow-y-auto">
+  <div class="p-6 flex flex-col h-full text-white">
+    <button id="mobile-close" class="self-end text-4xl font-light mb-8 hover:text-orange-400 transition">&times;</button>
+    
+    <nav class="flex flex-col gap-6 text-lg font-medium">
+      <a href="index.html" class="hover:text-orange-400 transition py-2">Home</a>
+      <a href="services.html" class="hover:text-orange-400 transition py-2">Services</a>
+      <a href="portfolio.html" class="hover:text-orange-400 transition py-2">Portfolio</a>
+      <a href="pricing.html" class="hover:text-orange-400 transition py-2">Pricing</a>
+      <a href="about.html" class="hover:text-orange-400 transition py-2">About</a>
+      <a href="blog.html" class="hover:text-orange-400 transition py-2">Blog</a>
+      
+      <div class="border-t border-orange-900/40 my-4 pt-4">
+        <a href="team.html" class="hover:text-orange-400 transition block py-2">Team</a>
+        <a href="hire us.html" class="hover:text-orange-400 transition block py-2">Hire Us</a>
+        <a href="testimonial.html" class="hover:text-orange-400 transition block py-2">Testimonial</a>
+      </div>
+      
+      <a href="contact.html" class="mt-auto inline-block px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full text-center font-semibold hover:scale-105 transition">
+        Contact Us
+      </a>
+    </nav>
+  </div>
+</div>
+
+<div id="overlay" class="fixed inset-0 bg-black/60 hidden z-[9998] lg:hidden"></div>
+
+<section class="py-24 md:py-32 bg-gradient-to-b from-black via-gray-950 to-black">
+  <div class="container mx-auto px-6 text-center">
+    <h1 class="text-5xl md:text-6xl font-extrabold flame-gradient mb-6">Our Services</h1>
+    <p class="text-xl md:text-2xl text-orange-300 mb-16 max-w-3xl mx-auto">
+      We deliver bold, high-impact digital solutions designed to accelerate your growth.
+    </p>
+  </div>
+</section>
+
+<section class="py-20">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <div class="bg-gray-900/70 p-10 rounded-2xl border border-orange-900/50 hover:border-orange-500/70 transition">
+        <h2 class="text-3xl font-bold flame-gradient mb-6">Custom Web Design</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Modern, responsive websites built with performance, accessibility, and conversion in mind. We create digital experiences that reflect your brand's energy and drive real business results.
+        </p>
+        <ul class="text-gray-400 space-y-3 mb-8">
+          <li>• Fully responsive & mobile-first</li>
+          <li>• Fast loading speeds (Core Web Vitals optimized)</li>
+          <li>• SEO-friendly structure</li>
+          <li>• CMS integration (WordPress, Webflow, custom)</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900/70 p-10 rounded-2xl border border-orange-900/50 hover:border-orange-500/70 transition">
+        <h2 class="text-3xl font-bold flame-gradient mb-6">High-Converting Landing Pages</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Purpose-built pages designed to capture leads, sell products, or promote offers with maximum impact.
+        </p>
+        <ul class="text-gray-400 space-y-3 mb-8">
+          <li>• A/B testing ready structure</li>
+          <li>• Strong copy & CTA hierarchy</li>
+          <li>• Integration with email tools & CRMs</li>
+          <li>• Mobile-optimized hero sections</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900/70 p-10 rounded-2xl border border-orange-900/50 hover:border-orange-500/70 transition">
+        <h2 class="text-3xl font-bold flame-gradient mb-6">Graphics & Logo Design</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Powerful visual identity and marketing assets that make your brand unforgettable.
+        </p>
+        <ul class="text-gray-400 space-y-3 mb-8">
+          <li>• Logo & brand identity systems</li>
+          <li>• Social media graphics & templates</li>
+          <li>• Marketing collateral (banners, flyers)</li>
+          <li>• Illustration & icon sets</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900/70 p-10 rounded-2xl border border-orange-900/50 hover:border-orange-500/70 transition">
+        <h2 class="text-3xl font-bold flame-gradient mb-6">Email Marketing</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Strategic, beautiful email campaigns that nurture leads and drive repeat business.
+        </p>
+        <ul class="text-gray-400 space-y-3 mb-8">
+          <li>• Welcome sequences & automations</li>
+          <li>• Promotional & newsletter campaigns</li>
+          <li>• High deliverability best practices</li>
+          <li>• Integration with Klaviyo, Mailchimp, etc.</li>
+        </ul>
+      </div>
+
+      <!-- NEW: Video Editing Service Card -->
+      <div class="bg-gray-900/70 p-10 rounded-2xl border border-orange-900/50 hover:border-orange-500/70 transition">
+        <h2 class="text-3xl font-bold flame-gradient mb-6">Professional Video Editing</h2>
+        <p class="text-gray-300 mb-6 leading-relaxed">
+          Cinematic, high-energy videos that captivate audiences and amplify your message — from short-form social content to polished brand films.
+        </p>
+        <ul class="text-gray-400 space-y-3 mb-8">
+          <li>• Fast-paced social reels & TikToks</li>
+          <li>• Brand story videos & explainers</li>
+          <li>• Motion graphics & animated overlays</li>
+          <li>• Color grading, sound design & pacing</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bg-black text-white py-12 border-t border-orange-900/50">
+  <div class="container mx-auto px-6 text-center">
+    <img src="Ruach favicon.png" alt="Ruacheon" class="h-20 mx-auto mb-6 opacity-90"/>
+    <p class="text-orange-400 font-medium text-lg mb-3">RUACHEON – TIMELESS TECH</p>
+    <p class="text-gray-400 mb-8">Web • Landing Pages • Graphics • Logos • Email Marketing • Video Editing</p>
+    <p class="text-sm text-gray-600">© 2026 Ruacheon. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ────────────────────────────────────────────────
+  // Mobile hamburger menu
+  // ────────────────────────────────────────────────
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileClose  = document.getElementById('mobile-close');
+  const mobileMenu   = document.getElementById('mobile-menu');
+  const overlay      = document.getElementById('overlay');
+
+  if (mobileToggle && mobileMenu && overlay) {
+    const openMobile = () => {
+      mobileMenu.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    };
+
+    const closeMobile = () => {
+      mobileMenu.classList.add('translate-x-full');
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+
+    mobileToggle.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    overlay.addEventListener('click', closeMobile);
+
+    // Close mobile menu when any link inside is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobile);
+    });
+  }
+
+  // ────────────────────────────────────────────────
+  // Desktop "More" dropdown – single click toggle
+  // ────────────────────────────────────────────────
+  const moreToggle   = document.getElementById('more-toggle');
+  const moreDropdown = document.getElementById('more-dropdown');
+  const moreIcon     = document.getElementById('more-icon');
+
+  if (moreToggle && moreDropdown) {
+    const toggleMore = (event) => {
+      event.stopPropagation();
+      moreDropdown.classList.toggle('hidden');
+      moreDropdown.classList.toggle('opacity-0');
+      moreDropdown.classList.toggle('scale-95');
+      moreIcon.classList.toggle('rotate-180');
+    };
+
+    const closeMore = (event) => {
+      if (!moreToggle.contains(event.target) && !moreDropdown.contains(event.target)) {
+        moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+        moreIcon.classList.remove('rotate-180');
+      }
+    };
+
+    moreToggle.addEventListener('click', toggleMore);
+    document.addEventListener('click', closeMore);
+
+    // Close dropdown when clicking any link inside it
+    moreDropdown.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        moreDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+        moreIcon.classList.remove('rotate-180');
+      });
+    });
+  }
+
+  console.log('Header navigation script loaded – mobile menu should now work');
+});
+</script>
+
+</body>
+</html>
